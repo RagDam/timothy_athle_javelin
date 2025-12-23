@@ -42,9 +42,13 @@ export const Header: FC = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl md:text-2xl font-bold text-white hover:text-blue-400 transition-colors"
+            className="text-lg md:text-xl font-bold text-white hover:text-blue-400 transition-colors"
           >
-            Timothy<span className="text-blue-500">.</span>
+            <span className="hidden sm:inline">Timothy Montavon - Athlétisme</span>
+            <span className="sm:hidden">Timothy</span>
+            <span className="text-blue-500"> & </span>
+            <span className="hidden sm:inline">Javelot</span>
+            <span className="sm:hidden text-blue-500">Javelot</span>
           </Link>
 
           {/* Navigation Desktop */}
