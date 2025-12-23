@@ -123,15 +123,15 @@ export default function AboutPage() {
             <AnimatedSection animation="fadeUp" delay={0.1}>
               <CoachCard
                 name="Noël Patinec"
-                role="Entraîneur principal"
+                role="Entraîneur polyvalent"
                 club="US Arnage (ESA)"
-                description="Mon coach depuis mes débuts, il m'accompagne dans ma progression technique."
+                description="Mon coach depuis mes débuts, il me forme sur l'ensemble des disciplines de l'athlétisme."
               />
             </AnimatedSection>
             <AnimatedSection animation="fadeUp" delay={0.2}>
               <CoachCard
                 name="Luc Duquerroy"
-                role="Entraîneur fédéral"
+                role="Entraîneur fédéral javelot"
                 club="EC Poitiers (Pôle Espoir)"
                 description="Il supervise tous mes entraînements de javelot au quotidien dans le cadre de mon sport-études."
               />
