@@ -1,4 +1,5 @@
 import { type Metadata } from 'next';
+import Image from 'next/image';
 import { AnimatedSection } from '@/components/ui';
 import { ContactForm } from './ContactForm';
 import { Mail, Instagram, MapPin } from 'lucide-react';
@@ -13,8 +14,18 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-green-600/20 to-slate-900" />
+      <section className="relative py-24 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero/contact.jpg"
+            alt="Timothy Montavon"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-slate-900" />
+        </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">

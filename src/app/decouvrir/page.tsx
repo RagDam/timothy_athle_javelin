@@ -35,7 +35,17 @@ export default function DecouvrirPage() {
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-600/20 to-slate-900" />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero/decouvrir.jpg"
+            alt="Timothy Montavon avec ses structures sportives"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-slate-900" />
+        </div>
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-400 text-sm mb-6">
