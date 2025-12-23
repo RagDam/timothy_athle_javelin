@@ -7,7 +7,7 @@ export const siteConfig = {
   name: 'Timothy Montavon',
   title: 'Timothy Montavon - Athlète Javelot',
   description: 'Site officiel de Timothy Montavon, double Champion de France Minime 2025 au lancer de javelot. Découvrez mon parcours, mes résultats et mes actualités.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://timothy-montavon.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://timothy-montavon-athle.vercel.app',
 
   author: {
     name: 'Timothy Montavon',
