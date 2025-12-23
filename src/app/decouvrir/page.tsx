@@ -1,7 +1,8 @@
 import { type Metadata } from 'next';
+import Image from 'next/image';
 import { AnimatedSection } from '@/components/ui';
 import { Button } from '@/components/ui';
-import { ExternalLink, Building2, MapPin, Star, GraduationCap, Trophy, Globe } from 'lucide-react';
+import { ExternalLink, Building2, MapPin, Star, Trophy, Globe } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Découvrir - Timothy Montavon',
@@ -20,13 +21,15 @@ const parcours = [
         role: 'Club formateur',
         description: 'Mon club de cœur où tout a commencé. C\'est ici que j\'ai découvert le javelot et développé mes bases techniques.',
         url: 'https://usarnage.athle.fr',
+        logo: '/images/partners/logo-us-arnage.png',
         highlight: true,
       },
       {
         name: 'Entente Sarthe Athlétisme (ESA)',
         role: 'Entente départementale',
-        description: 'Structure regroupant les clubs de la Sarthe pour les compétitions.',
+        description: 'Structure regroupant les clubs de la Sarthe pour les compétitions régionales et nationales.',
         url: 'https://esa72.athle.fr',
+        logo: '/images/partners/logo-esa.png',
       },
     ],
   },
@@ -36,10 +39,11 @@ const parcours = [
     lieu: 'Poitiers',
     items: [
       {
-        name: 'Pôle Espoir Poitiers',
-        role: 'Structure de haut niveau',
-        description: 'Intégration au Pôle Espoir pour un entraînement intensif et un suivi personnalisé vers le haut niveau.',
-        url: '',
+        name: 'Pôle Espoir Athlétisme',
+        role: 'Structure de haut niveau - Lycée Camille Guérin',
+        description: 'Intégration au Pôle Espoir de Poitiers pour un entraînement intensif, un suivi personnalisé et une scolarité aménagée vers le haut niveau.',
+        url: 'https://lyc-camilleguerin.fr/section-athletisme/',
+        logo: '/images/partners/logo-ligue-na.png',
         highlight: true,
         badge: 'Actuel',
       },
@@ -60,16 +64,19 @@ const institutions = [
     name: 'Ligue Pays de la Loire',
     description: 'Ma ligue régionale d\'origine',
     url: 'https://paysdelaloire.athle.fr',
+    logo: '/images/partners/logo-ligue-pdl.png',
   },
   {
     name: 'Ligue Nouvelle-Aquitaine',
     description: 'Ma nouvelle ligue régionale à Poitiers',
     url: 'https://nouvelleaquitaine.athle.fr',
+    logo: '/images/partners/logo-ligue-na.png',
   },
   {
     name: 'Fédération Française d\'Athlétisme',
     description: 'La fédération nationale qui régit l\'athlétisme en France',
     url: 'https://www.athle.fr',
+    logo: '/images/partners/logo-ffa.png',
   },
 ];
 
@@ -173,16 +180,27 @@ export default function DecouvrirPage() {
                   href={institution.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block bg-slate-800/50 rounded-xl p-5 hover:bg-slate-800/70 transition-all hover:scale-[1.02] group"
+                  className="block bg-slate-800/50 rounded-xl p-5 hover:bg-slate-800/70 transition-all hover:scale-[1.02] group h-full"
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h3 className="font-bold text-white group-hover:text-blue-400 transition-colors mb-1">
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0 p-1">
+                        <Image
+                          src={institution.logo}
+                          alt={`Logo ${institution.name}`}
+                          width={40}
+                          height={40}
+                          className="object-contain w-full h-full"
+                        />
+                      </div>
+                      <h3 className="font-bold text-white group-hover:text-blue-400 transition-colors text-sm leading-tight">
                         {institution.name}
                       </h3>
-                      <p className="text-sm text-slate-400">{institution.description}</p>
                     </div>
-                    <ExternalLink className="text-slate-600 group-hover:text-blue-400 transition-colors flex-shrink-0" size={16} />
+                    <p className="text-sm text-slate-400 flex-grow">{institution.description}</p>
+                    <div className="flex justify-end mt-3">
+                      <ExternalLink className="text-slate-600 group-hover:text-blue-400 transition-colors" size={16} />
+                    </div>
                   </div>
                 </a>
               </AnimatedSection>
@@ -220,6 +238,7 @@ interface StructureItem {
   role: string;
   description: string;
   url: string;
+  logo?: string;
   highlight?: boolean;
   badge?: string;
 }
@@ -243,13 +262,22 @@ function StructureCard({ item }: StructureCardProps) {
           : 'bg-slate-800/50 hover:bg-slate-800/70'
       } ${item.url ? 'cursor-pointer group' : ''}`}
     >
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex-grow">
+      <div className="flex items-start gap-4">
+        {item.logo && (
+          <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0 p-1.5">
+            <Image
+              src={item.logo}
+              alt={`Logo ${item.name}`}
+              width={48}
+              height={48}
+              className="object-contain w-full h-full"
+            />
+          </div>
+        )}
+        <div className="flex-grow min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-1">
-            {item.highlight && <Star className="text-amber-500" size={16} />}
-            <h4 className={`font-bold ${item.url ? 'group-hover:text-blue-400 transition-colors' : ''} ${
-              item.highlight ? 'text-white' : 'text-white'
-            }`}>
+            {item.highlight && <Star className="text-amber-500 flex-shrink-0" size={16} />}
+            <h4 className={`font-bold ${item.url ? 'group-hover:text-blue-400 transition-colors' : ''} text-white`}>
               {item.name}
             </h4>
             {item.badge && (
