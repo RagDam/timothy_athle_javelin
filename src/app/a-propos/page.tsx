@@ -131,9 +131,9 @@ export default function AboutPage() {
             <AnimatedSection animation="fadeUp" delay={0.2}>
               <CoachCard
                 name="Luc Duquerroy"
-                role="Entraîneur sport-études"
-                club="EC Poitiers"
-                description="Il supervise mes entraînements au quotidien dans le cadre du sport-études."
+                role="Entraîneur fédéral"
+                club="EC Poitiers (Pôle Espoir)"
+                description="Il supervise tous mes entraînements de javelot au quotidien dans le cadre de mon sport-études."
               />
             </AnimatedSection>
           </div>
