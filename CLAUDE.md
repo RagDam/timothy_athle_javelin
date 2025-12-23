@@ -9,6 +9,22 @@
 
 ---
 
+## RÈGLES IMPORTANTES
+
+### Serveur de développement
+
+**INTERDIT** : Ne JAMAIS lancer le serveur de développement (`npm run dev`) par toi-même.
+L'utilisateur dispose d'un fichier `start-dev.bat` qu'il lance lui-même.
+
+### Commits Git
+
+**OBLIGATOIRE** : Les commits doivent être **unitaires**.
+- Un commit = une seule feature ou un seul fix
+- Ne jamais regrouper plusieurs fonctionnalités dans un même commit
+- Granularité fine pour un historique clair et des reverts faciles
+
+---
+
 ## Architecture
 
 ### Structure des dossiers
