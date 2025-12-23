@@ -38,7 +38,7 @@ export const HeroSection: FC<HeroSectionProps> = ({
           alt="Timothy Montavon en plein lancer de javelot"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-right md:object-center"
           sizes="100vw"
         />
         {/* Overlay sombre pour lisibilité du texte */}
