@@ -2,6 +2,7 @@
 
 import { type FC, useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -42,8 +43,15 @@ export const Header: FC = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="text-lg md:text-xl font-bold text-white hover:text-blue-400 transition-colors"
+            className="flex items-center gap-2 text-lg md:text-xl font-bold text-white hover:text-blue-400 transition-colors"
           >
+            <Image
+              src="/images/logo/logo.png"
+              alt="TM Logo"
+              width={40}
+              height={40}
+              className="h-8 w-auto md:h-10"
+            />
             <span className="hidden sm:inline">Timothy Montavon - Athlétisme</span>
             <span className="sm:hidden">Timothy</span>
             <span className="text-blue-500"> & </span>
