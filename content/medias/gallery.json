@@ -1,0 +1,42 @@
+{
+  "categories": [
+    {
+      "id": "competitions",
+      "name": "Compétitions",
+      "description": "Photos en compétition"
+    },
+    {
+      "id": "training",
+      "name": "Entraînement",
+      "description": "Séances d'entraînement"
+    },
+    {
+      "id": "events",
+      "name": "Événements",
+      "description": "Remises de prix, meetings"
+    }
+  ],
+  "photos": [
+    {
+      "id": "photo-example",
+      "src": "/images/gallery/example.jpg",
+      "alt": "Description de la photo",
+      "category": "competitions",
+      "date": "2024-01-01",
+      "featured": false,
+      "width": 1920,
+      "height": 1280
+    }
+  ],
+  "videos": [
+    {
+      "id": "video-example",
+      "type": "youtube",
+      "videoId": "XXXXXXXXXXX",
+      "title": "Titre de la vidéo",
+      "thumbnail": null,
+      "date": "2024-01-01",
+      "featured": false
+    }
+  ]
+}

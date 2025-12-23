@@ -1,0 +1,23 @@
+{
+  "events": [
+    {
+      "id": "event-example",
+      "title": "Exemple - À remplacer",
+      "date": "2025-06-15",
+      "endDate": null,
+      "location": {
+        "venue": "Stade Example",
+        "city": "Ville",
+        "country": "France"
+      },
+      "type": "competition",
+      "importance": "major",
+      "description": "Description de l'événement",
+      "status": "upcoming",
+      "links": {
+        "event": null,
+        "results": null
+      }
+    }
+  ]
+}

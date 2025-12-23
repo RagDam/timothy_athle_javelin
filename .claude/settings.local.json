@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /A \"c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin\")",
+      "Bash(tree:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(where:*)",
+      "Bash(where npm:*)",
+      "Bash(cmd /c \"where node\")",
+      "Bash(cmd /c \"node --version 2>&1\")",
+      "Bash(cmd /c \"node --version && npm --version\")",
+      "Bash(cmd /c \"C:\\\\Program Files\\\\nodejs\\\\node.exe --version\")",
+      "Bash(powershell -Command \"node --version; npm --version\")",
+      "Bash(powershell -Command \"Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; npm --version\")",
+      "Bash(powershell -Command \"npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias ''@/*'' --use-npm --yes\")",
+      "Bash(powershell -Command \"npx create-next-app@latest timothy-site --typescript --tailwind --eslint --app --src-dir --import-alias ''@/*'' --use-npm --yes\")",
+      "Bash(powershell -Command \"Get-ChildItem -Path ''c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin\\\\timothy-site'' -Force | Move-Item -Destination ''c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin'' -Force; Remove-Item ''c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin\\\\timothy-site'' -Force -Recurse -ErrorAction SilentlyContinue\")",
+      "Bash(powershell -Command \"cd ''c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin''; npm install framer-motion lucide-react clsx tailwind-merge gray-matter remark remark-html resend @vercel/analytics\")",
+      "Bash(powershell -Command \"cd ''c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin''; npm run build\")",
+      "Bash(powershell -Command \"cd ''c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin''; npm run dev\")",
+      "Bash(powershell -Command \"Get-Content ''c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin\\\\content\\\\palmares\\\\2024.md''\")",
+      "Bash(powershell -Command \"Remove-Item ''c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin\\\\content\\\\palmares\\\\2024.md''\")",
+      "Bash(powershell -Command:*)",
+      "Bash(cmd /c \"dir /B /O-D \"\"C:\\\\Users\\\\timot\\\\OneDrive\\\\Images\\\\Captures d''écran\"\" 2>&1 | head -5\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"c:\\\\Users\\\\timot\\\\Timothy_AthleAndJavelin\\\\copy_screenshots.ps1\")"
+    ]
+  }
+}

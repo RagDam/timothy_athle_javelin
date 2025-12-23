@@ -1,0 +1,433 @@
+{
+  "metadata": {
+    "lastUpdated": "2025-12-23",
+    "description": "Résultats de compétitions de javelot de Timothy Montavon"
+  },
+  "resultats": [
+    {
+      "id": "2025-12-06-coulaines-5070",
+      "date": "2025-12-06",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 50.70,
+      "engin": "700g",
+      "classement": 1,
+      "isRecord": true,
+      "notes": "Record personnel 700g - Niveau R1"
+    },
+    {
+      "id": "2025-07-14-lens-4977",
+      "date": "2025-07-14",
+      "competition": "Coupe de France des Ligues Minimes",
+      "lieu": "Lens",
+      "perf": 49.77,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false,
+      "notes": "Champion de France"
+    },
+    {
+      "id": "2025-06-29-segre-5000",
+      "date": "2025-06-29",
+      "competition": "Compétition",
+      "lieu": "Segré",
+      "perf": 50.00,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-06-18-lens-5016",
+      "date": "2025-06-18",
+      "competition": "Championnats de France UGSEL",
+      "lieu": "Lens",
+      "perf": 50.16,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": true,
+      "notes": "Champion de France UGSEL - Record personnel 600g"
+    },
+    {
+      "id": "2025-06-15-mayenne-4694",
+      "date": "2025-06-15",
+      "competition": "Compétition",
+      "lieu": "Mayenne",
+      "perf": 46.94,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-06-07-coulaines-4836",
+      "date": "2025-06-07",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 48.36,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-05-24-nantes-4705",
+      "date": "2025-05-24",
+      "competition": "Compétition",
+      "lieu": "Nantes",
+      "perf": 47.05,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-05-17-coulaines-4295",
+      "date": "2025-05-17",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 42.95,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-05-11-mauges-sur-loire-4608",
+      "date": "2025-05-11",
+      "competition": "Compétition",
+      "lieu": "Mauges Sur Loire",
+      "perf": 46.08,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-04-26-coulaines-3793",
+      "date": "2025-04-26",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 37.93,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-04-19-ancenis-saint-gereon-4131",
+      "date": "2025-04-19",
+      "competition": "Compétition",
+      "lieu": "Ancenis-Saint-Gereon",
+      "perf": 41.31,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-03-16-louviers-4778",
+      "date": "2025-03-16",
+      "competition": "Compétition",
+      "lieu": "Louviers",
+      "perf": 47.78,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-02-09-saint-nazaire-4322",
+      "date": "2025-02-09",
+      "competition": "Compétition",
+      "lieu": "Saint Nazaire",
+      "perf": 43.22,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-01-25-laval-4455",
+      "date": "2025-01-25",
+      "competition": "Compétition",
+      "lieu": "Laval",
+      "perf": 44.55,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2025-01-05-saint-barthelemy-anjou-4216",
+      "date": "2025-01-05",
+      "competition": "Compétition",
+      "lieu": "Saint Barthélemy d'Anjou",
+      "perf": 42.16,
+      "engin": "600g",
+      "classement": null,
+      "isRecord": false,
+      "notes": "HC"
+    },
+    {
+      "id": "2024-12-07-coulaines-4307",
+      "date": "2024-12-07",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 43.07,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2024-10-13-coulaines-3707",
+      "date": "2024-10-13",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 37.07,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2024-06-30-saint-cyr-sur-loire-3565",
+      "date": "2024-06-30",
+      "competition": "Compétition",
+      "lieu": "Saint Cyr Sur Loire",
+      "perf": 35.65,
+      "engin": "600g",
+      "classement": 3,
+      "isRecord": false
+    },
+    {
+      "id": "2024-06-28-nogent-le-rotrou-3368",
+      "date": "2024-06-28",
+      "competition": "Compétition",
+      "lieu": "Nogent Le Rotrou",
+      "perf": 33.68,
+      "engin": "600g",
+      "classement": 2,
+      "isRecord": false
+    },
+    {
+      "id": "2024-06-23-challans-3824",
+      "date": "2024-06-23",
+      "competition": "Championnats de France UGSEL",
+      "lieu": "Challans",
+      "perf": 38.24,
+      "engin": "600g",
+      "classement": 4,
+      "isRecord": false,
+      "notes": "Initialement noté Strasbourg dans l'ancien fichier"
+    },
+    {
+      "id": "2024-06-22-allonnes-3450",
+      "date": "2024-06-22",
+      "competition": "Compétition",
+      "lieu": "Allonnes",
+      "perf": 34.50,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2024-06-18-strasbourg-3655",
+      "date": "2024-06-18",
+      "competition": "Compétition",
+      "lieu": "Strasbourg",
+      "perf": 36.55,
+      "engin": "600g",
+      "classement": 8,
+      "isRecord": false
+    },
+    {
+      "id": "2024-06-09-coulaines-3548",
+      "date": "2024-06-09",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 35.48,
+      "engin": "600g",
+      "classement": 6,
+      "isRecord": false
+    },
+    {
+      "id": "2024-06-01-montfort-le-gesnois-3336",
+      "date": "2024-06-01",
+      "competition": "Compétition",
+      "lieu": "Montfort Le Gesnois",
+      "perf": 33.36,
+      "engin": "600g",
+      "classement": 2,
+      "isRecord": false
+    },
+    {
+      "id": "2024-05-19-coulaines-3786",
+      "date": "2024-05-19",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 37.86,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2024-05-05-mayenne-3394",
+      "date": "2024-05-05",
+      "competition": "Compétition",
+      "lieu": "Mayenne",
+      "perf": 33.94,
+      "engin": "600g",
+      "classement": 2,
+      "isRecord": false
+    },
+    {
+      "id": "2024-04-20-le-mans-3466",
+      "date": "2024-04-20",
+      "competition": "Compétition",
+      "lieu": "Le Mans",
+      "perf": 34.66,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2024-04-13-arnage-3093",
+      "date": "2024-04-13",
+      "competition": "Compétition",
+      "lieu": "Arnage",
+      "perf": 30.93,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2024-02-11-vineuil-2783",
+      "date": "2024-02-11",
+      "competition": "Compétition",
+      "lieu": "Vineuil",
+      "perf": 27.83,
+      "engin": "600g",
+      "classement": 9,
+      "isRecord": false
+    },
+    {
+      "id": "2024-01-28-challans-3129",
+      "date": "2024-01-28",
+      "competition": "Compétition",
+      "lieu": "Challans",
+      "perf": 31.29,
+      "engin": "600g",
+      "classement": 4,
+      "isRecord": false
+    },
+    {
+      "id": "2023-12-02-coulaines-3015",
+      "date": "2023-12-02",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 30.15,
+      "engin": "600g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2023-10-15-coulaines-2673",
+      "date": "2023-10-15",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 26.73,
+      "engin": "600g",
+      "classement": 4,
+      "isRecord": false
+    },
+    {
+      "id": "2023-06-24-montfort-le-gesnois-2768",
+      "date": "2023-06-24",
+      "competition": "Compétition",
+      "lieu": "Montfort Le Gesnois",
+      "perf": 27.68,
+      "engin": "500g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2023-06-20-lens-3188",
+      "date": "2023-06-20",
+      "competition": "Championnats de France UGSEL",
+      "lieu": "Lens",
+      "perf": 31.88,
+      "engin": "500g",
+      "classement": 4,
+      "isRecord": true,
+      "notes": "Record personnel 500g"
+    },
+    {
+      "id": "2023-06-18-coulaines-3187",
+      "date": "2023-06-18",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 31.87,
+      "engin": "500g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2023-06-04-la-fleche-3162",
+      "date": "2023-06-04",
+      "competition": "Compétition",
+      "lieu": "La Flèche",
+      "perf": 31.62,
+      "engin": "500g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2023-04-30-coulaines-2633",
+      "date": "2023-04-30",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 26.33,
+      "engin": "500g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2022-06-12-challans-2274",
+      "date": "2022-06-12",
+      "competition": "Compétition",
+      "lieu": "Challans",
+      "perf": 22.74,
+      "engin": "500g",
+      "classement": 11,
+      "isRecord": false
+    },
+    {
+      "id": "2022-05-14-coulaines-3011",
+      "date": "2022-05-14",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 30.11,
+      "engin": "500g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2022-05-01-coulaines-2296",
+      "date": "2022-05-01",
+      "competition": "Compétition",
+      "lieu": "Coulaines",
+      "perf": 22.96,
+      "engin": "500g",
+      "classement": 1,
+      "isRecord": false
+    },
+    {
+      "id": "2022-04-24-la-fleche-2222",
+      "date": "2022-04-24",
+      "competition": "Compétition",
+      "lieu": "La Flèche",
+      "perf": 22.22,
+      "engin": "500g",
+      "classement": 1,
+      "isRecord": false
+    }
+  ],
+  "records": {
+    "700g": { "perf": 50.70, "date": "2025-12-06", "lieu": "Coulaines" },
+    "600g": { "perf": 50.16, "date": "2025-06-18", "lieu": "Lens" },
+    "500g": { "perf": 31.88, "date": "2023-06-20", "lieu": "Lens" }
+  },
+  "titres": [
+    { "annee": 2025, "titre": "Champion de France UGSEL Minime", "lieu": "Lens", "perf": 50.16 },
+    { "annee": 2025, "titre": "Coupe de France des Ligues Minimes", "lieu": "Lens", "perf": 49.77 }
+  ]
+}

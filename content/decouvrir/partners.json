@@ -1,0 +1,28 @@
+{
+  "partners": [
+    {
+      "id": "ffa",
+      "name": "Fédération Française d'Athlétisme",
+      "description": "La fédération nationale qui régit l'athlétisme en France",
+      "url": "https://www.athle.fr",
+      "logo": "/images/partners/logo-ffa.png",
+      "category": "federation"
+    },
+    {
+      "id": "esa",
+      "name": "Entente Sarthe Athlétisme",
+      "description": "Mon club formateur au Mans/Arnage",
+      "url": "",
+      "logo": "/images/partners/logo-esa.png",
+      "category": "club"
+    },
+    {
+      "id": "ec-poitiers",
+      "name": "EC Poitiers",
+      "description": "Mon club actuel à Poitiers",
+      "url": "",
+      "logo": "/images/partners/logo-ec-poitiers.png",
+      "category": "club"
+    }
+  ]
+}
