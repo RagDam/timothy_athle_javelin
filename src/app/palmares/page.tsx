@@ -372,7 +372,7 @@ function ResultCard({ result }: ResultCardProps) {
       ? 'RP'
       : '-';
 
-  const isHighlight = result.classement === 1 || result.isRecord;
+  const isHighlight = result.classement === 1;
 
   return (
     <div

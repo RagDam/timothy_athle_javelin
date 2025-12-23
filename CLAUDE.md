@@ -248,3 +248,8 @@ Quand Timothy fournit de nouveaux résultats par copier-coller :
 3. Ajouter uniquement les nouveaux résultats
 4. Mettre à jour les records si nécessaire
 5. Mettre à jour `metadata.lastUpdated`
+
+### Affichage des résultats
+
+- **Surlignage jaune** : Uniquement pour les 1ères places (classement === 1)
+- Ne PAS surligner les records personnels (isRecord) en jaune
