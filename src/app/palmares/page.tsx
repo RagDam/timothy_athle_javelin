@@ -346,6 +346,7 @@ interface ResultCardProps {
     competition: string;
     lieu: string;
     perf: number;
+    engin: string;
     classement: number | null;
     isRecord: boolean;
     notes?: string;
@@ -371,8 +372,8 @@ function ResultCard({ result }: ResultCardProps) {
     classementText = 'HC';
   }
 
-  // Ajouter RP si c'est un record personnel
-  const recordBadge = result.isRecord ? 'RP' : null;
+  // Ajouter RP avec le poids si c'est un record personnel
+  const recordBadge = result.isRecord ? `RP ${result.engin}` : null;
 
   const isHighlight = result.classement === 1;
 
