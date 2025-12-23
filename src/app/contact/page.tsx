@@ -2,6 +2,7 @@ import { type Metadata } from 'next';
 import { AnimatedSection } from '@/components/ui';
 import { ContactForm } from './ContactForm';
 import { Mail, Instagram, MapPin } from 'lucide-react';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
   title: 'Contact - Timothy Montavon',
@@ -46,8 +47,8 @@ export default function ContactPage() {
                 <ContactInfo
                   icon={<Instagram className="text-pink-500" size={24} />}
                   label="Instagram"
-                  value="@timothy_athletisme"
-                  href="https://instagram.com/timothy_athletisme"
+                  value={`@${siteConfig.social.instagram}`}
+                  href={`https://instagram.com/${siteConfig.social.instagram}`}
                 />
                 <ContactInfo
                   icon={<Mail className="text-blue-500" size={24} />}

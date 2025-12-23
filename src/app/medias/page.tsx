@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { AnimatedSection } from '@/components/ui';
 import { Button } from '@/components/ui';
 import { Camera, Instagram, ExternalLink } from 'lucide-react';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
   title: 'Médias - Timothy Montavon',
@@ -48,11 +49,11 @@ export default function MediasPage() {
               <Instagram className="text-pink-500" size={32} />
               <div>
                 <p className="text-white font-medium">Suivez-moi sur Instagram</p>
-                <p className="text-slate-400 text-sm">@timothy_athletisme</p>
+                <p className="text-slate-400 text-sm">@{siteConfig.social.instagram}</p>
               </div>
             </div>
             <Button
-              href="https://instagram.com/timothy_athletisme"
+              href={`https://instagram.com/${siteConfig.social.instagram}`}
               variant="accent"
               external
             >

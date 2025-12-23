@@ -19,15 +19,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Pour le MVP, on log simplement le message
+    // TODO: Pour le MVP, le message est juste validé
     // Plus tard, on intégrera Resend pour envoyer les emails
-    console.log('Nouveau message de contact:', {
-      name: data.name,
-      email: data.email,
-      subject: data.subject,
-      message: data.message,
-      date: new Date().toISOString(),
-    });
 
     // TODO: Intégrer Resend pour envoyer les emails
     // import { Resend } from 'resend';
