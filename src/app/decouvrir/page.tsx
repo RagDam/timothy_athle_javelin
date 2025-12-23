@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: 'Découvrez les clubs, comités et fédérations qui m\'accompagnent dans mon parcours sportif.',
 };
 
-// Clubs et structures locales
-const clubs = [
+// Structures locales (Sarthe)
+const structuresLocales = [
   {
     name: 'US Arnage',
     description: 'L\'US Arnage Athlétisme est un club dynamique en Sarthe, regroupant des passionnés de piste, de cross, de trail et de course sur route. Depuis l\'âge de 6 ans, je m\'y entraîne trois fois par semaine, entouré d\'une équipe motivante et d\'entraîneurs expérimentés.',
@@ -29,15 +29,9 @@ const clubs = [
     url: 'https://cd72.athle.fr',
     logo: '/images/partners/logo-cd72.png',
   },
-  {
-    name: 'Pôle Espoir Athlétisme',
-    description: 'Le Pôle Espoir Athlétisme de Poitiers, au Lycée Camille Guérin, permet aux jeunes athlètes de haut niveau de combiner scolarité aménagée et entraînement intensif. Intégré depuis 2024, j\'y bénéficie d\'un suivi personnalisé vers le haut niveau.',
-    url: 'https://lyc-camilleguerin.fr/section-athletisme/',
-    logo: '/images/partners/logo-ligue-na.png',
-  },
 ];
 
-// Ligues et fédération
+// Ligues et Fédération
 const institutions = [
   {
     name: 'Ligue Pays de la Loire',
@@ -46,8 +40,8 @@ const institutions = [
     logo: '/images/partners/logo-ligue-pdl.png',
   },
   {
-    name: 'Ligue Nouvelle-Aquitaine',
-    description: 'La Ligue Nouvelle-Aquitaine d\'Athlétisme encadre la pratique de l\'athlétisme dans la région. C\'est ma nouvelle ligue régionale depuis mon intégration au Pôle Espoir de Poitiers.',
+    name: 'Ligue Nouvelle-Aquitaine & Pôle Espoir',
+    description: 'La Ligue Nouvelle-Aquitaine d\'Athlétisme gère le Pôle Espoir de Poitiers au Lycée Camille Guérin. Intégré depuis 2024, j\'y bénéficie d\'un entraînement intensif, d\'une scolarité aménagée et d\'un suivi personnalisé vers le haut niveau.',
     url: 'https://nouvelleaquitaine.athle.fr',
     logo: '/images/partners/logo-ligue-na.png',
   },
@@ -93,8 +87,8 @@ export default function DecouvrirPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {clubs.map((structure, index) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {structuresLocales.map((structure, index) => (
               <AnimatedSection key={index} animation="fadeUp" delay={0.1 * index}>
                 <StructureCard structure={structure} />
               </AnimatedSection>
