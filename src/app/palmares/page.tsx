@@ -361,16 +361,18 @@ function ResultCard({ result }: ResultCardProps) {
   // Vérifier si HC est dans les notes
   const isHC = result.notes?.includes('HC');
 
-  const classementText =
-    result.classement === 1
-      ? '1er'
-      : result.classement
-      ? `${result.classement}e`
-      : isHC
-      ? 'HC'
-      : result.isRecord
-      ? 'RP'
-      : '-';
+  // Texte du classement
+  let classementText = '-';
+  if (result.classement === 1) {
+    classementText = '1er';
+  } else if (result.classement) {
+    classementText = `${result.classement}e`;
+  } else if (isHC) {
+    classementText = 'HC';
+  }
+
+  // Ajouter RP si c'est un record personnel
+  const recordBadge = result.isRecord ? 'RP' : null;
 
   const isHighlight = result.classement === 1;
 
@@ -385,13 +387,18 @@ function ResultCard({ result }: ResultCardProps) {
           <span className="text-xs text-slate-500 w-14 flex-shrink-0">{formattedDate}</span>
           <span className="text-slate-400 text-sm truncate">{result.lieu}</span>
         </div>
-        <div className="flex items-center gap-3 flex-shrink-0">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <span className={`font-bold ${isHighlight ? 'text-amber-400' : 'text-white'}`}>
             {result.perf} m
           </span>
+          {recordBadge && (
+            <span className="text-xs font-medium text-blue-400 bg-blue-500/20 px-1.5 py-0.5 rounded">
+              {recordBadge}
+            </span>
+          )}
           <span
             className={`text-xs font-medium w-8 text-right ${
-              result.classement === 1 || result.isRecord ? 'text-green-400' : 'text-slate-500'
+              result.classement === 1 ? 'text-green-400' : 'text-slate-500'
             }`}
           >
             {classementText}
