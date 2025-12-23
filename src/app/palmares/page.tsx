@@ -388,14 +388,14 @@ function ResultCard({ result }: ResultCardProps) {
           <span className="text-slate-400 text-sm truncate">{result.lieu}</span>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
-          <span className={`font-bold ${isHighlight ? 'text-amber-400' : 'text-white'}`}>
-            {result.perf} m
-          </span>
           {recordBadge && (
             <span className="text-xs font-medium text-blue-400 bg-blue-500/20 px-1.5 py-0.5 rounded">
               {recordBadge}
             </span>
           )}
+          <span className={`font-bold ${isHighlight ? 'text-amber-400' : 'text-white'}`}>
+            {result.perf} m
+          </span>
           <span
             className={`text-xs font-medium w-8 text-right ${
               result.classement === 1 ? 'text-green-400' : 'text-slate-500'
