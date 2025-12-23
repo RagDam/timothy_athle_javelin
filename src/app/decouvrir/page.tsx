@@ -57,11 +57,6 @@ const parcours = [
 // Institutions
 const institutions = [
   {
-    name: 'Fédération Française d\'Athlétisme',
-    description: 'La fédération nationale qui régit l\'athlétisme en France',
-    url: 'https://www.athle.fr',
-  },
-  {
     name: 'Ligue Pays de la Loire',
     description: 'Ma ligue régionale d\'origine',
     url: 'https://paysdelaloire.athle.fr',
@@ -70,6 +65,11 @@ const institutions = [
     name: 'Ligue Nouvelle-Aquitaine',
     description: 'Ma nouvelle ligue régionale à Poitiers',
     url: 'https://nouvelleaquitaine.athle.fr',
+  },
+  {
+    name: 'Fédération Française d\'Athlétisme',
+    description: 'La fédération nationale qui régit l\'athlétisme en France',
+    url: 'https://www.athle.fr',
   },
 ];
 
