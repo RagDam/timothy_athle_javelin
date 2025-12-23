@@ -1,28 +1,77 @@
 {
-  "partners": [
+  "parcours": [
+    {
+      "periode": "2019 - 2024",
+      "titre": "Les débuts",
+      "lieu": "Le Mans",
+      "structures": [
+        {
+          "id": "us-arnage",
+          "name": "US Arnage",
+          "role": "Club formateur",
+          "description": "Mon club de cœur où tout a commencé",
+          "url": "https://usarnage.athle.fr",
+          "logo": "/images/partners/logo-us-arnage.png",
+          "highlight": true
+        },
+        {
+          "id": "esa",
+          "name": "Entente Sarthe Athlétisme",
+          "role": "Entente départementale",
+          "description": "Structure regroupant les clubs de la Sarthe",
+          "url": "https://esa72.athle.fr",
+          "logo": "/images/partners/logo-esa.png"
+        }
+      ]
+    },
+    {
+      "periode": "Depuis 2024",
+      "titre": "Vers le haut niveau",
+      "lieu": "Poitiers",
+      "structures": [
+        {
+          "id": "pole-espoir",
+          "name": "Pôle Espoir Poitiers",
+          "role": "Structure de haut niveau",
+          "description": "Entraînement intensif et suivi personnalisé",
+          "url": "",
+          "logo": "/images/partners/logo-pole-espoir.png",
+          "highlight": true,
+          "current": true
+        },
+        {
+          "id": "ec-poitiers",
+          "name": "EC Poitiers",
+          "role": "Club d'entraînement",
+          "description": "Mon club dans le cadre du sport-études",
+          "url": "https://ecpoitiers.athle.fr",
+          "logo": "/images/partners/logo-ec-poitiers.png",
+          "current": true
+        }
+      ]
+    }
+  ],
+  "institutions": [
     {
       "id": "ffa",
       "name": "Fédération Française d'Athlétisme",
       "description": "La fédération nationale qui régit l'athlétisme en France",
       "url": "https://www.athle.fr",
-      "logo": "/images/partners/logo-ffa.png",
-      "category": "federation"
+      "logo": "/images/partners/logo-ffa.png"
     },
     {
-      "id": "esa",
-      "name": "Entente Sarthe Athlétisme",
-      "description": "Mon club formateur au Mans/Arnage",
-      "url": "",
-      "logo": "/images/partners/logo-esa.png",
-      "category": "club"
+      "id": "ligue-pdl",
+      "name": "Ligue Pays de la Loire",
+      "description": "Ma ligue régionale d'origine",
+      "url": "https://paysdelaloire.athle.fr",
+      "logo": "/images/partners/logo-ligue-pdl.png"
     },
     {
-      "id": "ec-poitiers",
-      "name": "EC Poitiers",
-      "description": "Mon club actuel à Poitiers",
-      "url": "",
-      "logo": "/images/partners/logo-ec-poitiers.png",
-      "category": "club"
+      "id": "ligue-na",
+      "name": "Ligue Nouvelle-Aquitaine",
+      "description": "Ma nouvelle ligue régionale à Poitiers",
+      "url": "https://nouvelleaquitaine.athle.fr",
+      "logo": "/images/partners/logo-ligue-na.png"
     }
   ]
 }
