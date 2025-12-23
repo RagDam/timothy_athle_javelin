@@ -195,3 +195,39 @@ export function getResultatsByYear(): Record<string, ResultatCompetition[]> {
 
   return byYear;
 }
+
+// Types pour les partenaires/structures
+export interface PartnerItem {
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  logo: string;
+  facebook?: string;
+  instagram?: string;
+}
+
+export interface PartnerSection {
+  id: string;
+  title: string;
+  icon: 'users' | 'globe';
+  iconColor: 'amber' | 'blue';
+  items: PartnerItem[];
+}
+
+export interface PartnersData {
+  metadata: {
+    lastUpdated: string;
+    description: string;
+  };
+  sections: PartnerSection[];
+}
+
+/**
+ * Récupère les données des partenaires/structures depuis le JSON
+ */
+export function getPartners(): PartnersData {
+  const filePath = path.join(contentDirectory, 'decouvrir', 'partners.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  return JSON.parse(fileContents) as PartnersData;
+}

@@ -2,58 +2,35 @@ import { type Metadata } from 'next';
 import Image from 'next/image';
 import { AnimatedSection } from '@/components/ui';
 import { Button } from '@/components/ui';
-import { ExternalLink, Building2, Globe, Users } from 'lucide-react';
+import { ExternalLink, Building2, Globe, Users, Facebook, Instagram } from 'lucide-react';
+import { getPartners, type PartnerItem, type PartnerSection } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Découvrir - Timothy Montavon',
   description: 'Découvrez les clubs, comités et fédérations qui m\'accompagnent dans mon parcours sportif.',
 };
 
-// Structures locales (Sarthe)
-const structuresLocales = [
-  {
-    name: 'US Arnage',
-    description: 'L\'US Arnage Athlétisme est un club dynamique en Sarthe, regroupant des passionnés de piste, de cross, de trail et de course sur route. Depuis l\'âge de 6 ans, je m\'y entraîne trois fois par semaine, entouré d\'une équipe motivante et d\'entraîneurs expérimentés.',
-    url: 'https://usarnage.athle.fr',
-    logo: '/images/partners/logo-us-arnage.png',
-  },
-  {
-    name: 'Sarthe ESA',
-    description: 'L\'Entente Sarthe Athlétisme (ESA) est une association créée en 2016, regroupant neuf clubs historiques de la Sarthe, dont l\'US Arnage. Elle est reconnue comme le plus grand club de France en nombre de licenciés.',
-    url: 'https://esa72.athle.fr',
-    logo: '/images/partners/logo-esa.png',
-  },
-  {
-    name: 'Comité Athlé 72',
-    description: 'Le Comité Départemental d\'Athlétisme de la Sarthe (CD72) supervise et promeut les activités d\'athlétisme dans le département, offrant des informations sur les compétitions, les formations, et les clubs affiliés.',
-    url: 'https://cd72.athle.fr',
-    logo: '/images/partners/logo-cd72.png',
-  },
-];
+// Map des icônes par type
+const iconMap = {
+  users: Users,
+  globe: Globe,
+} as const;
 
-// Ligues et Fédération
-const institutions = [
-  {
-    name: 'Ligue Pays de la Loire',
-    description: 'La Ligue d\'Athlétisme des Pays de la Loire est le cœur battant de l\'athlétisme dans la région, reliant passionnés et compétiteurs à travers cinq départements. Plus qu\'une simple organisation, elle inspire et soutient les athlètes avec des événements, des formations, et un véritable réseau de clubs dynamiques.',
-    url: 'https://paysdelaloire.athle.fr',
-    logo: '/images/partners/logo-ligue-pdl.png',
+// Map des couleurs par type
+const colorMap = {
+  amber: {
+    bg: 'bg-amber-500/20',
+    text: 'text-amber-500',
   },
-  {
-    name: 'Ligue Nouvelle-Aquitaine & Pôle Espoir',
-    description: 'La Ligue Nouvelle-Aquitaine d\'Athlétisme gère le Pôle Espoir de Poitiers au Lycée Camille Guérin. Intégré depuis 2024, j\'y bénéficie d\'un entraînement intensif, d\'une scolarité aménagée et d\'un suivi personnalisé vers le haut niveau.',
-    url: 'https://nouvelleaquitaine.athle.fr',
-    logo: '/images/partners/logo-ligue-na.png',
+  blue: {
+    bg: 'bg-blue-500/20',
+    text: 'text-blue-500',
   },
-  {
-    name: 'FFA Athlétisme',
-    description: 'La Fédération Française d\'Athlétisme (FFA), fondée en 1920, encadre et développe la pratique de l\'athlétisme en France. Son site web propose actualités, résultats, calendriers, et ressources pour athlètes, clubs, entraîneurs et officiels.',
-    url: 'https://www.athle.fr',
-    logo: '/images/partners/logo-ffa.png',
-  },
-];
+} as const;
 
 export default function DecouvrirPage() {
+  const partnersData = getPartners();
+
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
@@ -75,49 +52,14 @@ export default function DecouvrirPage() {
         </div>
       </section>
 
-      {/* Clubs et structures */}
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center">
-                <Users className="text-amber-500" size={20} />
-              </div>
-              <h2 className="text-2xl font-bold text-white">Clubs & Structures</h2>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {structuresLocales.map((structure, index) => (
-              <AnimatedSection key={index} animation="fadeUp" delay={0.1 * index}>
-                <StructureCard structure={structure} />
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Ligues et Fédération */}
-      <section className="py-16 bg-slate-800/30">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <Globe className="text-blue-500" size={20} />
-              </div>
-              <h2 className="text-2xl font-bold text-white">Ligues & Fédération</h2>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {institutions.map((structure, index) => (
-              <AnimatedSection key={index} animation="fadeUp" delay={0.1 * index}>
-                <StructureCard structure={structure} />
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Sections dynamiques */}
+      {partnersData.sections.map((section, sectionIndex) => (
+        <SectionBlock
+          key={section.id}
+          section={section}
+          isAlternate={sectionIndex % 2 === 1}
+        />
+      ))}
 
       {/* CTA Partenariat */}
       <section className="py-16">
@@ -143,21 +85,44 @@ export default function DecouvrirPage() {
   );
 }
 
-interface Structure {
-  name: string;
-  description: string;
-  url: string;
-  logo: string;
+interface SectionBlockProps {
+  section: PartnerSection;
+  isAlternate: boolean;
 }
 
-function StructureCard({ structure }: { structure: Structure }) {
+function SectionBlock({ section, isAlternate }: SectionBlockProps) {
+  const IconComponent = iconMap[section.icon];
+  const colors = colorMap[section.iconColor];
+
   return (
-    <a
-      href={structure.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex flex-col h-full bg-slate-800/50 rounded-2xl p-6 hover:bg-slate-800/70 transition-all hover:scale-[1.02] group"
-    >
+    <section className={`py-16 ${isAlternate ? 'bg-slate-800/30' : ''}`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AnimatedSection className="mb-10">
+          <div className="flex items-center gap-3 mb-2">
+            <div className={`w-10 h-10 ${colors.bg} rounded-lg flex items-center justify-center`}>
+              <IconComponent className={colors.text} size={20} />
+            </div>
+            <h2 className="text-2xl font-bold text-white">{section.title}</h2>
+          </div>
+        </AnimatedSection>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {section.items.map((item, index) => (
+            <AnimatedSection key={item.id} animation="fadeUp" delay={0.1 * index}>
+              <StructureCard structure={item} />
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StructureCard({ structure }: { structure: PartnerItem }) {
+  const hasLinks = structure.url || structure.facebook || structure.instagram;
+
+  return (
+    <div className="flex flex-col h-full bg-slate-800/50 rounded-2xl p-6 hover:bg-slate-800/70 transition-all group">
       {/* Logo */}
       <div className="flex justify-center mb-4">
         <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center p-3">
@@ -172,7 +137,7 @@ function StructureCard({ structure }: { structure: Structure }) {
       </div>
 
       {/* Nom */}
-      <h3 className="text-lg font-bold text-white text-center mb-3 group-hover:text-blue-400 transition-colors">
+      <h3 className="text-lg font-bold text-white text-center mb-3">
         {structure.name}
       </h3>
 
@@ -181,11 +146,45 @@ function StructureCard({ structure }: { structure: Structure }) {
         {structure.description}
       </p>
 
-      {/* Lien */}
-      <div className="flex justify-center items-center gap-2 mt-4 text-blue-400 text-sm">
-        <span>Site Web</span>
-        <ExternalLink size={14} />
-      </div>
-    </a>
+      {/* Liens sociaux */}
+      {hasLinks && (
+        <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-slate-700/50">
+          {structure.url && (
+            <a
+              href={structure.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-blue-400 hover:text-blue-300 transition-colors text-sm"
+              title="Site web"
+            >
+              <ExternalLink size={16} />
+              <span>Site</span>
+            </a>
+          )}
+          {structure.facebook && (
+            <a
+              href={structure.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-blue-500 hover:text-blue-400 transition-colors text-sm"
+              title="Facebook"
+            >
+              <Facebook size={16} />
+            </a>
+          )}
+          {structure.instagram && (
+            <a
+              href={structure.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-pink-500 hover:text-pink-400 transition-colors text-sm"
+              title="Instagram"
+            >
+              <Instagram size={16} />
+            </a>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
