@@ -73,7 +73,7 @@ export default function AgendaPage() {
           src="/images/hero/agenda-hero.jpg"
           alt="Timothy Montavon - Javelot"
           fill
-          className="object-cover"
+          className="object-cover object-top"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900" />
