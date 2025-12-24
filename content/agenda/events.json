@@ -1,21 +1,71 @@
 {
   "events": [
     {
-      "id": "event-example",
-      "title": "Exemple - À remplacer",
-      "date": "2025-06-15",
+      "id": "2026-01-25-challans-regionaux-lancers",
+      "title": "Championnats Régionaux de Lancers Longs",
+      "date": "2026-01-25",
       "endDate": null,
+      "time": "15:45",
       "location": {
-        "venue": "Stade Example",
-        "city": "Ville",
+        "venue": "Stade Jean Léveillé",
+        "city": "Challans",
         "country": "France"
       },
       "type": "competition",
-      "importance": "major",
-      "description": "Description de l'événement",
+      "category": "U18",
+      "discipline": "Javelot",
+      "importance": "regional",
+      "image": "/images/partners/logo-ligue-pdl.png",
+      "description": "Championnats régionaux de lancers longs - Catégories U16 à Senior",
       "status": "upcoming",
       "links": {
-        "event": null,
+        "event": "https://www.paysdelaloire-athletisme.fr/evenements/2026/01/25/championnats-regionaux-de-lancers-longs-u16-a-se-challans-2298041",
+        "results": null
+      }
+    },
+    {
+      "id": "2026-02-08-tours-pre-france-lancers",
+      "title": "Pré-France de Lancers Longs",
+      "date": "2026-02-08",
+      "endDate": null,
+      "time": null,
+      "location": {
+        "venue": "Stade de Grandmont",
+        "city": "Tours",
+        "country": "France"
+      },
+      "type": "competition",
+      "category": "U18",
+      "discipline": "Javelot",
+      "importance": "national",
+      "image": "/images/partners/logo-ffa.png",
+      "description": "Pré-France de lancers longs - Qualifications nationales",
+      "status": "upcoming",
+      "links": {
+        "event": "https://www.paysdelaloire-athletisme.fr/evenements/2026/02/08/pre-france-de-lancers-longs-tours-2298043",
+        "results": null
+      }
+    },
+    {
+      "id": "2026-02-20-nice-france-lancers-hivernaux",
+      "title": "Championnats de France de Lancers Hivernaux",
+      "date": "2026-02-20",
+      "endDate": "2026-02-22",
+      "time": null,
+      "location": {
+        "venue": "Parc des Sports Charles Ehrmann",
+        "city": "Nice",
+        "country": "France"
+      },
+      "type": "competition",
+      "category": "U18",
+      "discipline": "Javelot",
+      "importance": "major",
+      "image": "/images/partners/logo-ffa.png",
+      "description": "Championnats de France de lancers hivernaux",
+      "status": "upcoming",
+      "links": {
+        "event": "https://www.paysdelaloire-athletisme.fr/evenements/2026/02/20/championnats-de-france-de-lancers-hivernaux-nice-2298022",
         "results": null
       }
     }
