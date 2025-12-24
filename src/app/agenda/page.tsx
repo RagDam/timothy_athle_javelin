@@ -69,7 +69,14 @@ export default function AgendaPage() {
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-cyan-600/20 to-slate-900" />
+        <Image
+          src="/images/hero/agenda-hero.jpg"
+          alt="Timothy Montavon - Javelot"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
