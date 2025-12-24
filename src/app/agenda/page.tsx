@@ -1,53 +1,70 @@
 import { type Metadata } from 'next';
+import Image from 'next/image';
 import { AnimatedSection } from '@/components/ui';
-import { Calendar, MapPin, Clock, Trophy } from 'lucide-react';
+import { Calendar, MapPin, Clock, Trophy, ExternalLink } from 'lucide-react';
+import fs from 'fs';
+import path from 'path';
 
 export const metadata: Metadata = {
   title: 'Agenda - Timothy Montavon',
   description: 'Calendrier des compétitions et événements de Timothy Montavon pour la saison 2025-2026.',
 };
 
-interface Event {
-  date: string;
-  title: string;
-  location: string;
-  type: 'competition' | 'training' | 'event';
-  description?: string;
-  isPast?: boolean;
+interface EventLocation {
+  venue: string;
+  city: string;
+  country: string;
 }
 
-const events: Event[] = [
-  {
-    date: '2025-12-06',
-    title: 'Championnats Départementaux',
-    location: 'Coulaines',
-    type: 'competition',
-    description: 'Record personnel 50,70m (700g)',
-    isPast: true,
-  },
-  {
-    date: '2025-07-14',
-    title: 'Coupe de France des Ligues Minimes',
-    location: 'Lens',
-    type: 'competition',
-    description: 'Champion de France - 49,77m',
-    isPast: true,
-  },
-  {
-    date: '2025-06-18',
-    title: 'Championnats de France UGSEL',
-    location: 'Lens',
-    type: 'competition',
-    description: 'Champion de France - 50,16m',
-    isPast: true,
-  },
-];
+interface EventLinks {
+  event: string | null;
+  results: string | null;
+}
 
-const upcomingEvents: Event[] = [
-  // Les prochaines compétitions seront ajoutées ici
-];
+interface Event {
+  id: string;
+  title: string;
+  date: string;
+  endDate: string | null;
+  time: string | null;
+  location: EventLocation;
+  type: string;
+  category: string;
+  discipline: string;
+  importance: 'regional' | 'national' | 'major';
+  image: string;
+  description: string;
+  status: string;
+  links: EventLinks;
+}
+
+interface EventsData {
+  events: Event[];
+}
+
+function getEvents(): Event[] {
+  const filePath = path.join(process.cwd(), 'content/agenda/events.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const data: EventsData = JSON.parse(fileContents);
+  return data.events;
+}
+
+function isEventPast(event: Event): boolean {
+  const eventDate = event.endDate || event.date;
+  return new Date(eventDate) < new Date();
+}
+
+const importanceLabels: Record<string, { label: string; color: string }> = {
+  regional: { label: 'Régional', color: 'bg-slate-600 text-slate-200' },
+  national: { label: 'National', color: 'bg-cyan-600 text-white' },
+  major: { label: 'Championnat de France', color: 'bg-amber-500 text-black' },
+};
 
 export default function AgendaPage() {
+  const allEvents = getEvents();
+  const upcomingEvents = allEvents.filter(e => !isEventPast(e)).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const pastEvents = allEvents.filter(e => isEventPast(e)).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
@@ -78,8 +95,8 @@ export default function AgendaPage() {
           {upcomingEvents.length > 0 ? (
             <div className="space-y-4">
               {upcomingEvents.map((event, index) => (
-                <AnimatedSection key={index} animation="fadeUp" delay={0.1 * index}>
-                  <EventCard event={event} />
+                <AnimatedSection key={event.id} animation="fadeUp" delay={0.1 * index}>
+                  <EventCard event={event} isPast={false} />
                 </AnimatedSection>
               ))}
             </div>
@@ -88,10 +105,7 @@ export default function AgendaPage() {
               <div className="bg-slate-800/50 rounded-xl p-8 text-center">
                 <Calendar className="mx-auto text-slate-600 mb-4" size={48} />
                 <p className="text-slate-400">
-                  Le calendrier 2026 sera bientôt disponible.
-                </p>
-                <p className="text-sm text-slate-500 mt-2">
-                  Les compétitions de la prochaine saison seront annoncées prochainement.
+                  Aucune compétition à venir pour le moment.
                 </p>
               </div>
             </AnimatedSection>
@@ -100,64 +114,119 @@ export default function AgendaPage() {
       </section>
 
       {/* Compétitions passées */}
-      <section className="py-16 bg-slate-800/30">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12">
-            <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-              <Trophy className="text-amber-500" size={28} />
-              Compétitions 2025
-            </h2>
-          </AnimatedSection>
+      {pastEvents.length > 0 && (
+        <section className="py-16 bg-slate-800/30">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedSection className="mb-12">
+              <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                <Trophy className="text-amber-500" size={28} />
+                Compétitions passées
+              </h2>
+            </AnimatedSection>
 
-          <div className="space-y-4">
-            {events.map((event, index) => (
-              <AnimatedSection key={index} animation="fadeUp" delay={0.1 * index}>
-                <EventCard event={event} />
-              </AnimatedSection>
-            ))}
+            <div className="space-y-4">
+              {pastEvents.map((event, index) => (
+                <AnimatedSection key={event.id} animation="fadeUp" delay={0.1 * index}>
+                  <EventCard event={event} isPast={true} />
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </main>
   );
 }
 
 interface EventCardProps {
   event: Event;
+  isPast: boolean;
 }
 
-function EventCard({ event }: EventCardProps) {
-  const date = new Date(event.date);
-  const formattedDate = date.toLocaleDateString('fr-FR', {
+function EventCard({ event, isPast }: EventCardProps) {
+  const startDate = new Date(event.date);
+  const formattedStartDate = startDate.toLocaleDateString('fr-FR', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
 
+  let dateDisplay = formattedStartDate;
+  if (event.endDate) {
+    const endDate = new Date(event.endDate);
+    const formattedEndDate = endDate.toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+    dateDisplay = `Du ${formattedStartDate} au ${formattedEndDate}`;
+  }
+
+  const importance = importanceLabels[event.importance] || importanceLabels.regional;
+
   return (
-    <div className={`bg-slate-800/50 rounded-xl p-6 border-l-4 ${
-      event.isPast ? 'border-slate-600' : 'border-cyan-500'
+    <div className={`bg-slate-800/50 rounded-xl overflow-hidden border-l-4 ${
+      isPast ? 'border-slate-600' : event.importance === 'major' ? 'border-amber-500' : 'border-cyan-500'
     }`}>
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex-1">
-          <div className="flex items-center gap-2 text-sm text-slate-400 mb-2">
-            <Clock size={14} />
-            <span>{formattedDate}</span>
+      <div className="flex flex-col sm:flex-row">
+        {/* Image */}
+        <div className="sm:w-24 sm:h-auto h-20 relative bg-slate-700 flex items-center justify-center p-4">
+          <Image
+            src={event.image}
+            alt={event.title}
+            width={64}
+            height={64}
+            className="object-contain"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 p-6">
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            {/* Badge importance */}
+            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${importance.color}`}>
+              {importance.label}
+            </span>
+            {/* Badge catégorie */}
+            <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-slate-300">
+              {event.category} - {event.discipline}
+            </span>
+            {isPast && (
+              <span className="px-2 py-0.5 rounded-full text-xs bg-slate-700 text-slate-400">
+                Terminé
+              </span>
+            )}
           </div>
+
           <h3 className="text-xl font-bold text-white mb-2">{event.title}</h3>
-          <div className="flex items-center gap-2 text-slate-400">
-            <MapPin size={14} />
-            <span>{event.location}</span>
+
+          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
+            <div className="flex items-center gap-1">
+              <Clock size={14} />
+              <span>{dateDisplay}</span>
+              {event.time && <span className="text-cyan-400">• {event.time}</span>}
+            </div>
+            <div className="flex items-center gap-1">
+              <MapPin size={14} />
+              <span>{event.location.venue}, {event.location.city}</span>
+            </div>
           </div>
+
           {event.description && (
-            <p className="mt-2 text-amber-400 font-medium">{event.description}</p>
+            <p className="mt-2 text-slate-300 text-sm">{event.description}</p>
+          )}
+
+          {event.links.event && (
+            <a
+              href={event.links.event}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 mt-3 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              Voir l&apos;événement <ExternalLink size={14} />
+            </a>
           )}
         </div>
-        {event.isPast && (
-          <div className="px-3 py-1 bg-slate-700 rounded-full text-xs text-slate-400">
-            Terminé
-          </div>
-        )}
       </div>
     </div>
   );
