@@ -27,17 +27,35 @@ export default function MediasPage() {
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-pink-600/20 via-purple-600/10 to-slate-900" />
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <AnimatedSection>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
-              Médias
-            </h1>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              Photos et vidéos de mes compétitions et entraînements
-            </p>
-          </AnimatedSection>
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/20 border border-pink-500/30 text-pink-400 text-sm mb-6">
+                <Camera size={16} />
+                <span>Photos, Vidéos & Presse</span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
+                Médias
+              </h1>
+              <p className="text-xl text-slate-300">
+                Photos et vidéos de mes compétitions et entraînements
+              </p>
+            </AnimatedSection>
+            <AnimatedSection animation="fadeUp" delay={0.2}>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl shadow-pink-500/20">
+                <Image
+                  src="/images/hero/media.jpg"
+                  alt="Timothy Montavon - Médias"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
