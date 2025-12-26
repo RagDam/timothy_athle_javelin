@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Rate limiting simple en mémoire (reset au redémarrage)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 heure
@@ -89,6 +87,9 @@ export async function POST(request: Request) {
       .split(',')
       .map((email) => email.trim())
       .filter(Boolean);
+
+    // Initialiser Resend au runtime (pas au build)
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Envoi de l'email avec Resend
     const { error } = await resend.emails.send({
