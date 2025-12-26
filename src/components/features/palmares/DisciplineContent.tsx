@@ -92,18 +92,25 @@ export function DisciplineContent({
     };
   };
 
-  // Préparer les données pour le graphique de progression
+  // Préparer les données pour le graphique de progression (toutes les compétitions)
   const getProgressionData = () => {
-    const allRecords = Object.values(records);
-    if (allRecords.length === 0) return [];
+    if (resultats.length === 0) return [];
 
-    const mainRecord = allRecords[0];
-    return Object.entries(mainRecord.records)
-      .map(([year, record]) => ({
-        date: year,
-        perf: parseFloat(record.perf),
+    // Utiliser toutes les compétitions, triées par date
+    return resultats
+      .map((r) => ({
+        date: r.date,
+        perf: parseFloat(r.perf),
+        epreuve: r.epreuve,
+        lieu: r.lieu,
       }))
-      .sort((a, b) => parseInt(a.date) - parseInt(b.date));
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  };
+
+  // Obtenir les épreuves uniques pour la légende
+  const getUniqueEpreuves = () => {
+    const epreuves = new Set(resultats.map((r) => r.epreuve));
+    return Array.from(epreuves);
   };
 
   // Grouper les résultats par année
@@ -364,11 +371,12 @@ function ResultCard({ result, color }: ResultCardProps) {
       }`}
     >
       <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <span className="text-xs text-slate-500 w-14 flex-shrink-0">{formattedDate}</span>
-          <span className="text-slate-400 text-sm truncate">{result.lieu}</span>
+          <span className="text-white text-sm font-medium truncate max-w-[140px]">{result.epreuve}</span>
+          <span className="text-slate-500 text-sm truncate hidden sm:inline">{result.lieu}</span>
           {result.niveau && (
-            <span className="text-xs text-slate-500 bg-slate-700 px-1.5 py-0.5 rounded">
+            <span className="text-xs text-slate-500 bg-slate-700 px-1.5 py-0.5 rounded hidden md:inline">
               {result.niveau}
             </span>
           )}

@@ -2,7 +2,6 @@
 
 import { type FC } from 'react';
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
@@ -10,8 +9,6 @@ import {
   Tooltip,
   ResponsiveContainer,
   ReferenceLine,
-  Legend,
-  Scatter,
   ComposedChart,
 } from 'recharts';
 
@@ -23,15 +20,22 @@ interface ProgressionData {
   lieu: string;
 }
 
-interface ProgressionChartProps {
-  data: ProgressionData[] | SimpleProgressionData[];
-  objectif?: number | null;
-  isTime?: boolean;
-}
-
 interface SimpleProgressionData {
   date: string;
   perf: number;
+}
+
+interface MultiEpreuveData {
+  date: string;
+  perf: number;
+  epreuve: string;
+  lieu: string;
+}
+
+interface ProgressionChartProps {
+  data: ProgressionData[] | SimpleProgressionData[] | MultiEpreuveData[];
+  objectif?: number | null;
+  isTime?: boolean;
 }
 
 const enginColors: Record<string, string> = {
@@ -40,52 +44,35 @@ const enginColors: Record<string, string> = {
   '700g': '#f59e0b', // amber
 };
 
-// Type guard pour vérifier si c'est des données simples
-function isSimpleData(data: ProgressionData[] | SimpleProgressionData[]): data is SimpleProgressionData[] {
-  return data.length > 0 && !('engin' in data[0]);
+// Couleurs pour les épreuves multiples
+const epreuveColors: string[] = [
+  '#3b82f6', // bleu
+  '#22c55e', // vert
+  '#f59e0b', // amber
+  '#8b5cf6', // violet
+  '#ef4444', // rouge
+  '#06b6d4', // cyan
+  '#ec4899', // rose
+];
+
+// Type guards
+function isSimpleData(data: ProgressionData[] | SimpleProgressionData[] | MultiEpreuveData[]): data is SimpleProgressionData[] {
+  return data.length > 0 && !('engin' in data[0]) && !('epreuve' in data[0]);
+}
+
+function isMultiEpreuveData(data: ProgressionData[] | SimpleProgressionData[] | MultiEpreuveData[]): data is MultiEpreuveData[] {
+  return data.length > 0 && 'epreuve' in data[0] && !('engin' in data[0]);
 }
 
 export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 60, isTime = false }) => {
-  // Détecter si c'est un mode simple (sans engin)
+  // Détecter le mode
   const isSimple = isSimpleData(data);
+  const isMultiEpreuve = isMultiEpreuveData(data);
 
   // Trier par date
   const sortedData = [...data].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
-
-  // Créer les données pour le graphique
-  const chartData = sortedData.map((item, index) => {
-    const baseData = {
-      ...item,
-      index,
-      dateLabel: isSimple
-        ? item.date // Pour les données annuelles simples, garder juste l'année
-        : new Date(item.date).toLocaleDateString('fr-FR', {
-            month: 'short',
-            year: '2-digit',
-          }),
-      fullDate: isSimple
-        ? item.date
-        : new Date(item.date).toLocaleDateString('fr-FR', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          }),
-    };
-
-    if (isSimple) {
-      return { ...baseData, perfSimple: item.perf };
-    }
-
-    const fullItem = item as ProgressionData;
-    return {
-      ...baseData,
-      perf500g: fullItem.engin === '500g' ? fullItem.perf : null,
-      perf600g: fullItem.engin === '600g' ? fullItem.perf : null,
-      perf700g: fullItem.engin === '700g' ? fullItem.perf : null,
-    };
-  });
 
   // Trouver min/max pour l'axe Y
   const perfs = data.map((d) => d.perf);
@@ -98,11 +85,149 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
       ? Math.max(Math.ceil(Math.max(...perfs) / 5) * 5, objectif + 5)
       : Math.ceil(Math.max(...perfs) / 5) * 5 + 5;
 
-  // Calculer l'intervalle pour les labels X (afficher environ 8-10 labels)
-  const tickInterval = Math.max(1, Math.floor(chartData.length / 8));
+  // Mode multi-épreuves (haies, poids, combinés, etc.)
+  if (isMultiEpreuve) {
+    const multiData = data as MultiEpreuveData[];
 
-  // Mode simple (autres disciplines)
+    // Obtenir les épreuves uniques
+    const epreuves = Array.from(new Set(multiData.map((d) => d.epreuve)));
+
+    // Créer un mapping épreuve -> couleur
+    const epreuveColorMap: Record<string, string> = {};
+    epreuves.forEach((ep, i) => {
+      epreuveColorMap[ep] = epreuveColors[i % epreuveColors.length];
+    });
+
+    // Créer les données pour le graphique avec une colonne par épreuve
+    const chartData = sortedData.map((item, index) => {
+      const d = item as MultiEpreuveData;
+      const baseData: Record<string, unknown> = {
+        ...d,
+        index,
+        dateLabel: new Date(d.date).toLocaleDateString('fr-FR', {
+          month: 'short',
+          year: '2-digit',
+        }),
+        fullDate: new Date(d.date).toLocaleDateString('fr-FR', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        }),
+      };
+
+      // Ajouter la perf pour l'épreuve correspondante
+      epreuves.forEach((ep) => {
+        const key = `perf_${ep.replace(/[^a-zA-Z0-9]/g, '_')}`;
+        baseData[key] = d.epreuve === ep ? d.perf : null;
+      });
+
+      return baseData;
+    });
+
+    const tickInterval = Math.max(1, Math.floor(chartData.length / 10));
+    const unit = isTime ? "''" : 'm';
+
+    return (
+      <div className="w-full">
+        {/* Légende des épreuves */}
+        <div className="flex flex-wrap gap-3 mb-6 text-sm">
+          {epreuves.map((ep) => (
+            <div key={ep} className="flex items-center gap-2">
+              <div
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: epreuveColorMap[ep] }}
+              />
+              <span className="text-slate-300 text-xs">{ep}</span>
+              <span className="text-slate-500 text-xs">
+                ({multiData.filter((d) => d.epreuve === ep).length})
+              </span>
+            </div>
+          ))}
+          <div className="ml-auto text-slate-500 text-xs">
+            Total: <span className="text-white font-medium">{multiData.length}</span>
+          </div>
+        </div>
+
+        <div className="h-[400px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart
+              data={chartData}
+              margin={{ top: 20, right: 30, left: 10, bottom: 60 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+              <XAxis
+                dataKey="dateLabel"
+                stroke="#94a3b8"
+                tick={{ fill: '#94a3b8', fontSize: 10 }}
+                tickLine={{ stroke: '#475569' }}
+                interval={tickInterval}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+              />
+              <YAxis
+                domain={isTime ? [maxPerf, minPerf] : [minPerf, maxPerf]}
+                stroke="#94a3b8"
+                tick={{ fill: '#94a3b8', fontSize: 12 }}
+                tickLine={{ stroke: '#475569' }}
+                tickFormatter={(value) => `${value}${unit}`}
+              />
+              <Tooltip
+                content={({ active, payload }) => {
+                  if (!active || !payload || !payload.length) return null;
+                  const d = payload[0].payload as MultiEpreuveData & { fullDate: string };
+                  const color = epreuveColorMap[d.epreuve] || '#3b82f6';
+                  return (
+                    <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-xl">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div
+                          className="w-3 h-3 rounded-full"
+                          style={{ backgroundColor: color }}
+                        />
+                        <span className="text-slate-300 text-xs">{d.epreuve}</span>
+                      </div>
+                      <p className="text-white font-bold text-lg">{d.perf}{unit}</p>
+                      <p className="text-slate-400 text-sm">{d.fullDate}</p>
+                      <p className="text-slate-500 text-xs">{d.lieu}</p>
+                    </div>
+                  );
+                }}
+              />
+
+              {/* Lignes par épreuve */}
+              {epreuves.map((ep) => {
+                const key = `perf_${ep.replace(/[^a-zA-Z0-9]/g, '_')}`;
+                return (
+                  <Line
+                    key={ep}
+                    type="monotone"
+                    dataKey={key}
+                    stroke={epreuveColorMap[ep]}
+                    strokeWidth={2}
+                    dot={{ fill: epreuveColorMap[ep], strokeWidth: 0, r: 4 }}
+                    activeDot={{ fill: epreuveColorMap[ep], strokeWidth: 0, r: 7 }}
+                    connectNulls
+                    name={ep}
+                  />
+                );
+              })}
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
+  }
+
+  // Mode simple (données annuelles - records par année)
   if (isSimple) {
+    const chartData = sortedData.map((item, index) => ({
+      ...item,
+      index,
+      dateLabel: item.date,
+      fullDate: item.date,
+      perfSimple: item.perf,
+    }));
+
     const unit = isTime ? "''" : 'm';
     return (
       <div className="w-full">
@@ -155,6 +280,28 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
 
   // Mode complet (javelot avec engins)
   const fullData = data as ProgressionData[];
+  const tickInterval = Math.max(1, Math.floor(sortedData.length / 8));
+
+  // Créer les données pour le graphique
+  const chartData = sortedData.map((item, index) => {
+    const fullItem = item as ProgressionData;
+    return {
+      ...fullItem,
+      index,
+      dateLabel: new Date(fullItem.date).toLocaleDateString('fr-FR', {
+        month: 'short',
+        year: '2-digit',
+      }),
+      fullDate: new Date(fullItem.date).toLocaleDateString('fr-FR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      }),
+      perf500g: fullItem.engin === '500g' ? fullItem.perf : null,
+      perf600g: fullItem.engin === '600g' ? fullItem.perf : null,
+      perf700g: fullItem.engin === '700g' ? fullItem.perf : null,
+    };
+  });
 
   return (
     <div className="w-full">

@@ -200,7 +200,6 @@
   },
   "resultats": {
     "haies": [
-      { "id": "2025-12-03-vouneuil-60m", "date": "2025-12-03", "epreuve": "60m Salle", "perf": "7.72", "lieu": "Vouneuil Sous Biard", "classement": 1, "niveau": "R2" },
       { "id": "2025-11-16-nantes-60mh", "date": "2025-11-16", "epreuve": "60m Haies (91) Salle", "perf": "9.12", "lieu": "Nantes", "classement": 1, "niveau": "R1", "isRecord": true },
       { "id": "2025-07-14-lens-100mh", "date": "2025-07-14", "epreuve": "100m Haies (84)", "perf": "14.63", "lieu": "Lens", "classement": 2 },
       { "id": "2025-06-29-segre-100mh", "date": "2025-06-29", "epreuve": "100m Haies (84)", "perf": "14.46", "lieu": "Segre", "classement": 2, "isRecord": true },
