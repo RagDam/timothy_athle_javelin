@@ -68,24 +68,26 @@ export default function AgendaPage() {
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <section className="relative py-32 overflow-hidden">
-        <Image
-          src="/images/hero/agenda-hero.jpg"
-          alt="Timothy Montavon - Javelot"
-          fill
-          className="object-cover object-top"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <AnimatedSection>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
-              Agenda
-            </h1>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              Calendrier des compétitions et événements
-            </p>
-          </AnimatedSection>
+      <section className="relative pt-16 md:pt-20 bg-slate-900 overflow-hidden">
+        <div className="relative h-[60vh] md:h-[70vh]">
+          <Image
+            src="/images/hero/agenda.jpg"
+            alt="Timothy Montavon devant le Los Angeles Memorial Coliseum"
+            fill
+            className="object-contain object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/20 via-70% to-slate-900" />
+          <div className="absolute bottom-8 md:bottom-12 left-0 right-0 z-10 text-center">
+            <AnimatedSection>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                Agenda
+              </h1>
+              <p className="text-lg md:text-xl text-slate-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                Calendrier des compétitions et événements
+              </p>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
