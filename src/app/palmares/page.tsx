@@ -50,7 +50,7 @@ export default function PalmaresPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium"
                 >
-                  <span>Voir ma fiche officielle FFA</span>
+                  <span>Ma fiche officielle FFA</span>
                   <ExternalLink size={14} />
                 </a>
                 <a
