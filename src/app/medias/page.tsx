@@ -2,8 +2,9 @@ import { type Metadata } from 'next';
 import Image from 'next/image';
 import { AnimatedSection } from '@/components/ui';
 import { Button } from '@/components/ui';
-import { Instagram, ExternalLink, Camera, ImageIcon } from 'lucide-react';
+import { Instagram, ExternalLink, Camera, Image as ImageIcon } from 'lucide-react';
 import { siteConfig } from '@/config/site';
+import { UploadedMediaGallery } from '@/components/features/UploadedMediaGallery';
 
 export const metadata: Metadata = {
   title: 'Médias - Timothy Montavon',
@@ -59,15 +60,8 @@ export default function MediasPage() {
             </p>
           </AnimatedSection>
 
-          {/* Placeholder - Galerie à venir */}
-          <AnimatedSection className="mb-8">
-            <div className="text-center py-12 bg-slate-800/30 rounded-xl border border-slate-700/50">
-              <ImageIcon className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-              <p className="text-slate-400">
-                La galerie photos et vidéos arrive bientôt
-              </p>
-            </div>
-          </AnimatedSection>
+          {/* Galerie des médias uploadés */}
+          <UploadedMediaGallery />
 
           {/* CTA Instagram */}
           <AnimatedSection>

@@ -1,5 +1,8 @@
 // Types globaux du projet
 
+// Export des types admin
+export * from './admin';
+
 /**
  * Navigation
  */

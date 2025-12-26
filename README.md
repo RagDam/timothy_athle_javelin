@@ -35,6 +35,7 @@ Site web personnel de Timothy Montavon, jeune athlète français spécialisé da
 | `/a-propos` | Biographie et parcours |
 | `/agenda` | Événements et compétitions à venir |
 | `/medias` | Galerie photos et vidéos |
+| `/presse` | Articles de presse et interviews |
 | `/decouvrir` | Liens partenaires et fédérations |
 | `/contact` | Formulaire de contact |
 

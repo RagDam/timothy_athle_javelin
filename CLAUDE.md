@@ -12,12 +12,24 @@
 
 Next.js 16 + TypeScript + Tailwind CSS + Framer Motion | Langue : Français
 
+## Services Externes (à maintenir à jour)
+
+| Service | URL | Rôle | Variables .env |
+|---------|-----|------|----------------|
+| **Vercel** | vercel.com | Hébergement + déploiement | - |
+| **Resend** | resend.com | Envoi emails contact | `RESEND_API_KEY`, `CONTACT_EMAIL` |
+| **Vercel Blob** | vercel.com/storage | Stockage médias admin | `BLOB_READ_WRITE_TOKEN` |
+| **NextAuth** | authjs.dev | Auth admin panel | `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `ADMIN_*` |
+
+**Note** : Lors de l'ajout d'un nouveau service externe, documenter ici avec URL + variables requises.
+
 ## Règles Critiques
 
 - **JAMAIS** lancer `npm run dev` (l'utilisateur a `start-dev.bat`)
 - **Commits unitaires** : 1 commit = 1 feature/fix, jamais grouper
 - **HEIC → JPEG** : Convertir auto avec `heic-convert` (qualité 0.9)
 - **Résultats sportifs** : Vérifier doublons avant ajout (date + lieu + perf)
+- **Services externes** : Si ajout d'un nouveau service/API, mettre à jour la section "Services Externes" + `.env.example`
 
 ## Architecture
 
