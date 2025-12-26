@@ -24,8 +24,14 @@ interface ProgressionData {
 }
 
 interface ProgressionChartProps {
-  data: ProgressionData[];
-  objectif?: number;
+  data: ProgressionData[] | SimpleProgressionData[];
+  objectif?: number | null;
+  isTime?: boolean;
+}
+
+interface SimpleProgressionData {
+  date: string;
+  perf: number;
 }
 
 const enginColors: Record<string, string> = {
@@ -34,37 +40,121 @@ const enginColors: Record<string, string> = {
   '700g': '#f59e0b', // amber
 };
 
-export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 60 }) => {
+// Type guard pour vérifier si c'est des données simples
+function isSimpleData(data: ProgressionData[] | SimpleProgressionData[]): data is SimpleProgressionData[] {
+  return data.length > 0 && !('engin' in data[0]);
+}
+
+export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 60, isTime = false }) => {
+  // Détecter si c'est un mode simple (sans engin)
+  const isSimple = isSimpleData(data);
+
   // Trier par date
   const sortedData = [...data].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
-  // Créer les données avec colonnes séparées par engin
-  const chartData = sortedData.map((item, index) => ({
-    ...item,
-    index,
-    dateLabel: new Date(item.date).toLocaleDateString('fr-FR', {
-      month: 'short',
-      year: '2-digit',
-    }),
-    fullDate: new Date(item.date).toLocaleDateString('fr-FR', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }),
-    perf500g: item.engin === '500g' ? item.perf : null,
-    perf600g: item.engin === '600g' ? item.perf : null,
-    perf700g: item.engin === '700g' ? item.perf : null,
-  }));
+  // Créer les données pour le graphique
+  const chartData = sortedData.map((item, index) => {
+    const baseData = {
+      ...item,
+      index,
+      dateLabel: isSimple
+        ? item.date // Pour les données annuelles simples, garder juste l'année
+        : new Date(item.date).toLocaleDateString('fr-FR', {
+            month: 'short',
+            year: '2-digit',
+          }),
+      fullDate: isSimple
+        ? item.date
+        : new Date(item.date).toLocaleDateString('fr-FR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          }),
+    };
+
+    if (isSimple) {
+      return { ...baseData, perfSimple: item.perf };
+    }
+
+    const fullItem = item as ProgressionData;
+    return {
+      ...baseData,
+      perf500g: fullItem.engin === '500g' ? fullItem.perf : null,
+      perf600g: fullItem.engin === '600g' ? fullItem.perf : null,
+      perf700g: fullItem.engin === '700g' ? fullItem.perf : null,
+    };
+  });
 
   // Trouver min/max pour l'axe Y
   const perfs = data.map((d) => d.perf);
-  const minPerf = Math.floor(Math.min(...perfs) / 5) * 5 - 5;
-  const maxPerf = Math.max(Math.ceil(Math.max(...perfs) / 5) * 5, objectif + 5);
+  const minPerf = isTime
+    ? Math.floor(Math.min(...perfs) - 1)
+    : Math.floor(Math.min(...perfs) / 5) * 5 - 5;
+  const maxPerf = isTime
+    ? Math.ceil(Math.max(...perfs) + 1)
+    : objectif
+      ? Math.max(Math.ceil(Math.max(...perfs) / 5) * 5, objectif + 5)
+      : Math.ceil(Math.max(...perfs) / 5) * 5 + 5;
 
   // Calculer l'intervalle pour les labels X (afficher environ 8-10 labels)
   const tickInterval = Math.max(1, Math.floor(chartData.length / 8));
+
+  // Mode simple (autres disciplines)
+  if (isSimple) {
+    const unit = isTime ? "''" : 'm';
+    return (
+      <div className="w-full">
+        <div className="h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart
+              data={chartData}
+              margin={{ top: 20, right: 30, left: 10, bottom: 20 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+              <XAxis
+                dataKey="dateLabel"
+                stroke="#94a3b8"
+                tick={{ fill: '#94a3b8', fontSize: 12 }}
+                tickLine={{ stroke: '#475569' }}
+              />
+              <YAxis
+                domain={isTime ? [maxPerf, minPerf] : [minPerf, maxPerf]}
+                stroke="#94a3b8"
+                tick={{ fill: '#94a3b8', fontSize: 12 }}
+                tickLine={{ stroke: '#475569' }}
+                tickFormatter={(value) => `${value}${unit}`}
+              />
+              <Tooltip
+                content={({ active, payload }) => {
+                  if (!active || !payload || !payload.length) return null;
+                  const d = payload[0].payload;
+                  return (
+                    <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-xl">
+                      <p className="text-white font-bold text-lg">{d.perf}{unit}</p>
+                      <p className="text-slate-400 text-sm">{d.fullDate}</p>
+                    </div>
+                  );
+                }}
+              />
+              <Line
+                type="monotone"
+                dataKey="perfSimple"
+                stroke="#3b82f6"
+                strokeWidth={3}
+                dot={{ fill: '#3b82f6', strokeWidth: 0, r: 6 }}
+                activeDot={{ fill: '#3b82f6', strokeWidth: 0, r: 8 }}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
+  }
+
+  // Mode complet (javelot avec engins)
+  const fullData = data as ProgressionData[];
 
   return (
     <div className="w-full">
@@ -74,25 +164,25 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
           <div className="w-3 h-3 rounded-full bg-green-500" />
           <span className="text-slate-400">500g</span>
           <span className="text-white font-medium">
-            ({data.filter((d) => d.engin === '500g').length} compétitions)
+            ({fullData.filter((d) => d.engin === '500g').length} compétitions)
           </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-blue-500" />
           <span className="text-slate-400">600g</span>
           <span className="text-white font-medium">
-            ({data.filter((d) => d.engin === '600g').length} compétitions)
+            ({fullData.filter((d) => d.engin === '600g').length} compétitions)
           </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-amber-500" />
           <span className="text-slate-400">700g</span>
           <span className="text-white font-medium">
-            ({data.filter((d) => d.engin === '700g').length} compétitions)
+            ({fullData.filter((d) => d.engin === '700g').length} compétitions)
           </span>
         </div>
         <div className="ml-auto text-slate-500">
-          Total: <span className="text-white font-medium">{data.length} compétitions</span>
+          Total: <span className="text-white font-medium">{fullData.length} compétitions</span>
         </div>
       </div>
 
@@ -123,17 +213,19 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
             <Tooltip content={<CustomTooltip />} />
 
             {/* Ligne objectif */}
-            <ReferenceLine
-              y={objectif}
-              stroke="#ef4444"
-              strokeDasharray="5 5"
-              label={{
-                value: `Objectif ${objectif}m`,
-                position: 'right',
-                fill: '#ef4444',
-                fontSize: 12,
-              }}
-            />
+            {objectif && (
+              <ReferenceLine
+                y={objectif}
+                stroke="#ef4444"
+                strokeDasharray="5 5"
+                label={{
+                  value: `Objectif ${objectif}m`,
+                  position: 'right',
+                  fill: '#ef4444',
+                  fontSize: 12,
+                }}
+              />
+            )}
 
             {/* Lignes par engin */}
             <Line
