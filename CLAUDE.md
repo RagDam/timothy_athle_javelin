@@ -83,9 +83,22 @@ Fichier : `content/palmares/resultats.json`
 - Surlignage jaune = 1ère place uniquement (pas les records)
 - Anti-doublon : vérifier date + lieu + perf avant ajout
 
+## Pages du site
+
+| Route | Description |
+|-------|-------------|
+| `/` | Accueil |
+| `/a-propos` | Parcours et présentation |
+| `/palmares` | Résultats sportifs |
+| `/medias` | Photos et vidéos (Instagram, galerie) |
+| `/presse` | Articles de presse et interviews |
+| `/agenda` | Calendrier des compétitions |
+| `/decouvrir` | Découverte du javelot |
+| `/contact` | Formulaire de contact |
+
 ## Articles de Presse & Interviews
 
-Fichier : `content/medias/presse.json`
+Fichier : `content/medias/presse.json` (affiché sur `/presse`)
 
 ```json
 {
