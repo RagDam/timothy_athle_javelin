@@ -20,10 +20,10 @@ export const siteConfig = {
     { label: 'Accueil', href: '/' },
     { label: 'À propos', href: '/a-propos' },
     { label: 'Palmarès', href: '/palmares' },
-    { label: 'Médias', href: '/medias' },
-    { label: 'Presse', href: '/presse' },
     { label: 'Agenda', href: '/agenda' },
     { label: 'Découvrir', href: '/decouvrir' },
+    { label: 'Médias', href: '/medias' },
+    { label: 'Presse', href: '/presse' },
     { label: 'Contact', href: '/contact' },
   ] satisfies NavLink[],
 
