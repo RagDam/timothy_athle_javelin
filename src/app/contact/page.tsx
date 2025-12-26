@@ -74,11 +74,19 @@ export default function ContactPage() {
               </div>
 
               {/* Clubs */}
-              <div className="mt-12 p-6 bg-slate-800/50 rounded-xl">
+              <div className="mt-12">
                 <h3 className="text-lg font-semibold text-white mb-4">Mes clubs</h3>
-                <div className="space-y-3">
-                  <ClubInfo name="US Arnage (ESA)" role="Club formateur" />
-                  <ClubInfo name="EC Poitiers" role="Entraînement sport-études" />
+                <div className="grid grid-cols-2 gap-3">
+                  <ClubCard
+                    name="US Arnage (ESA)"
+                    location="Sarthe@PDL"
+                    role="Club formateur"
+                  />
+                  <ClubCard
+                    name="Pôle Espoir Poitiers"
+                    location="Vienne@NA"
+                    role="Sport-études"
+                  />
                 </div>
               </div>
             </AnimatedSection>
@@ -135,16 +143,18 @@ function ContactInfo({ icon, label, value, href }: ContactInfoProps) {
   return content;
 }
 
-interface ClubInfoProps {
+interface ClubCardProps {
   name: string;
+  location: string;
   role: string;
 }
 
-function ClubInfo({ name, role }: ClubInfoProps) {
+function ClubCard({ name, location, role }: ClubCardProps) {
   return (
-    <div className="flex justify-between items-center">
-      <span className="text-white font-medium">{name}</span>
-      <span className="text-sm text-slate-400">{role}</span>
+    <div className="bg-slate-800/50 rounded-xl p-4 text-center">
+      <div className="text-white font-medium text-sm mb-1">{name}</div>
+      <div className="text-slate-500 text-xs mb-2">{location}</div>
+      <div className="text-xs text-blue-400">{role}</div>
     </div>
   );
 }
