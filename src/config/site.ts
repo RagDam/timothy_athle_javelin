@@ -33,6 +33,11 @@ export const siteConfig = {
     youtube: '',
   },
 
+  // Widgets externes
+  widgets: {
+    instagramFeed: '//lightwidget.com/widgets/ccefe098e3b45638909a152173a147c4.html',
+  },
+
   // Couleurs du thème
   theme: {
     primary: '#0F172A',    // Slate 900

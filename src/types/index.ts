@@ -124,8 +124,3 @@ export interface PageMeta {
   keywords?: string[];
   ogImage?: string;
 }
-
-/**
- * Instagram
- */
-export * from './instagram';
