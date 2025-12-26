@@ -15,9 +15,23 @@
       "color": "blue"
     },
     {
+      "id": "demi-fond",
+      "name": "Demi-fond",
+      "icon": "clock",
+      "isPrimary": false,
+      "color": "blue"
+    },
+    {
       "id": "haies",
       "name": "Haies",
       "icon": "timer",
+      "isPrimary": false,
+      "color": "blue"
+    },
+    {
+      "id": "relais",
+      "name": "Relais",
+      "icon": "users",
       "isPrimary": false,
       "color": "blue"
     },
@@ -57,6 +71,13 @@
       "color": "blue"
     },
     {
+      "id": "cross",
+      "name": "Cross",
+      "icon": "clock",
+      "isPrimary": false,
+      "color": "blue"
+    },
+    {
       "id": "combines",
       "name": "Combinés",
       "icon": "layers",
@@ -72,6 +93,52 @@
         "records": {
           "2025": { "perf": "7.72", "date": "2025-12-03", "lieu": "Vouneuil Sous Biard" }
         }
+      },
+      "100m": {
+        "name": "100m",
+        "type": "time",
+        "records": {
+          "2025": { "perf": "12.50", "date": "2025-05-25", "lieu": "Nantes" }
+        }
+      },
+      "120m": {
+        "name": "120m",
+        "type": "time",
+        "records": {
+          "2025": { "perf": "15.31", "date": "2025-04-26", "lieu": "Coulaines" }
+        }
+      }
+    },
+    "demi-fond": {
+      "1000m": {
+        "name": "1000m",
+        "type": "time",
+        "records": {
+          "2025": { "perf": "3:14.33", "date": "2025-05-25", "lieu": "Nantes" }
+        }
+      }
+    },
+    "relais": {
+      "4x60m": {
+        "name": "4x60m",
+        "type": "time",
+        "records": {
+          "2025": { "perf": "30.05", "date": "2025-05-17", "lieu": "Coulaines" }
+        }
+      },
+      "4x60m-mixte": {
+        "name": "4x60m Mixte",
+        "type": "time",
+        "records": {
+          "2025": { "perf": "31.09", "date": "2025-06-07", "lieu": "Coulaines" }
+        }
+      }
+    },
+    "cross": {
+      "cross": {
+        "name": "Cross",
+        "type": "time",
+        "records": {}
       }
     },
     "haies": {
@@ -216,7 +283,26 @@
   },
   "resultats": {
     "sprint": [
-      { "id": "2025-12-03-vouneuil-60m", "date": "2025-12-03", "epreuve": "60m Salle", "perf": "7.72", "lieu": "Vouneuil Sous Biard", "classement": 1, "niveau": "R2", "isRecord": true }
+      { "id": "2025-12-03-vouneuil-60m-f", "date": "2025-12-03", "epreuve": "60m Salle", "perf": "7.83", "lieu": "Vouneuil Sous Biard", "classement": 3, "niveau": "R3" },
+      { "id": "2025-12-03-vouneuil-60m-s", "date": "2025-12-03", "epreuve": "60m Salle", "perf": "7.72", "lieu": "Vouneuil Sous Biard", "classement": 1, "niveau": "R2", "isRecord": true },
+      { "id": "2025-11-15-nantes-60m", "date": "2025-11-15", "epreuve": "60m Salle", "perf": "7.81", "lieu": "Nantes", "classement": 3, "niveau": "R3" },
+      { "id": "2025-05-25-nantes-100m", "date": "2025-05-25", "epreuve": "100m", "perf": "12.50", "lieu": "Nantes", "classement": 4, "isRecord": true },
+      { "id": "2025-04-26-coulaines-120m", "date": "2025-04-26", "epreuve": "120m", "perf": "15.31", "lieu": "Coulaines", "classement": 1, "isRecord": true },
+      { "id": "2025-04-20-ancenis-100m", "date": "2025-04-20", "epreuve": "100m", "perf": "12.98", "lieu": "Ancenis-Saint-Gereon", "classement": 2 }
+    ],
+    "demi-fond": [
+      { "id": "2025-11-16-nantes-1000m", "date": "2025-11-16", "epreuve": "1000m Piste Courte", "perf": "3:16.83", "lieu": "Nantes", "classement": 8, "niveau": "D6" },
+      { "id": "2025-05-25-nantes-1000m", "date": "2025-05-25", "epreuve": "1000m", "perf": "3:14.33", "lieu": "Nantes", "classement": 3, "isRecord": true },
+      { "id": "2025-04-20-ancenis-1000m", "date": "2025-04-20", "epreuve": "1000m", "perf": "3:30.09", "lieu": "Ancenis-Saint-Gereon", "classement": 10 }
+    ],
+    "relais": [
+      { "id": "2025-06-07-coulaines-4x60m-mixte", "date": "2025-06-07", "epreuve": "4x60m Mixte", "perf": "31.09", "lieu": "Coulaines", "classement": 1, "isRecord": true },
+      { "id": "2025-05-17-coulaines-4x60m", "date": "2025-05-17", "epreuve": "4x60m", "perf": "30.05", "lieu": "Coulaines", "classement": 1, "isRecord": true },
+      { "id": "2025-05-11-mauges-4x60m-mixte", "date": "2025-05-11", "epreuve": "4x60m Mixte", "perf": "DQ", "lieu": "Mauges Sur Loire", "classement": null }
+    ],
+    "cross": [
+      { "id": "2025-01-17-lemans-cross", "date": "2025-01-17", "epreuve": "Cross 4e-3e UGSEL", "perf": "-", "lieu": "Le Mans", "classement": 16 },
+      { "id": "2025-01-12-stcalais-cross", "date": "2025-01-12", "epreuve": "Cross Minimes", "perf": "22:15", "lieu": "Saint Calais", "classement": 25 }
     ],
     "haies": [
       { "id": "2025-11-16-nantes-60mh", "date": "2025-11-16", "epreuve": "60m Haies (91) Salle", "perf": "9.12", "lieu": "Nantes", "classement": 1, "niveau": "R1", "isRecord": true },

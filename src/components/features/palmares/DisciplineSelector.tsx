@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Trophy, Timer, MoveHorizontal, MoveVertical, ArrowUp, Circle, Disc, Layers } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Trophy, Timer, MoveHorizontal, MoveVertical, ArrowUp, Circle, Disc, Layers, Clock, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const ICONS = {
@@ -14,6 +14,8 @@ const ICONS = {
   circle: Circle,
   disc: Disc,
   layers: Layers,
+  clock: Clock,
+  users: Users,
 };
 
 export interface Discipline {
