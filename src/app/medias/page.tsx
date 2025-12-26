@@ -13,20 +13,6 @@ export const metadata: Metadata = {
   description: 'Photos et vidéos de Timothy Montavon en compétition et à l\'entraînement.',
 };
 
-// Photos - à compléter avec tes vraies photos
-const photos = [
-  {
-    src: '/images/hero/timothy-lancer.jpg',
-    alt: 'Timothy Montavon - Lancer de javelot',
-    caption: 'En pleine action',
-  },
-  {
-    src: '/images/hero/timothy-lancer2.jpg',
-    alt: 'Timothy Montavon - Technique',
-    caption: 'Phase de lancer',
-  },
-];
-
 // Données chargées depuis content/medias/presse.json (triées par date décroissante)
 const pressArticles = ([...presseData.articles] as PressArticle[]).sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -84,26 +70,15 @@ export default function MediasPage() {
             </p>
           </AnimatedSection>
 
-          {/* Galerie photos */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {photos.map((photo, index) => (
-              <AnimatedSection key={index} animation="fadeUp" delay={0.1 * index}>
-                <div className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-800">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-white font-medium">{photo.caption}</p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
+          {/* Placeholder - Galerie à venir */}
+          <AnimatedSection className="mb-8">
+            <div className="text-center py-12 bg-slate-800/30 rounded-xl border border-slate-700/50">
+              <ImageIcon className="w-12 h-12 text-slate-600 mx-auto mb-4" />
+              <p className="text-slate-400">
+                La galerie photos et vidéos arrive bientôt
+              </p>
+            </div>
+          </AnimatedSection>
 
           {/* CTA Instagram */}
           <AnimatedSection>
