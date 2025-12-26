@@ -59,7 +59,7 @@ export default function PalmaresPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
                 >
-                  <span>Bilan Javelot U18 France 2025/26</span>
+                  <span>Bilan FFA Javelot U18 France 2025/26</span>
                   <ExternalLink size={14} />
                 </a>
               </div>
