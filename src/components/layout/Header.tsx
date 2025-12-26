@@ -52,11 +52,9 @@ export const Header: FC = () => {
               height={40}
               className="h-8 w-auto md:h-10"
             />
-            <span className="hidden sm:inline">Timothy Montavon - Athlétisme</span>
-            <span className="sm:hidden">Timothy</span>
+            <span>Athlé</span>
             <span className="text-blue-500"> & </span>
-            <span className="hidden sm:inline">Javelot</span>
-            <span className="sm:hidden text-blue-500">Javelot</span>
+            <span>Javelot</span>
           </Link>
 
           {/* Navigation Desktop */}
