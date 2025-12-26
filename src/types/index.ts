@@ -94,6 +94,29 @@ export interface MediaGallery {
 }
 
 /**
+ * Presse & Interviews
+ */
+export interface PressArticle {
+  id: string;
+  title: string;
+  source: string;
+  date: string;
+  url: string;
+  excerpt?: string;
+  tag?: string;
+}
+
+export interface Interview {
+  id: string;
+  title: string;
+  media: string;
+  date: string;
+  url: string;
+  sourceUrl?: string;
+  type: 'video' | 'audio' | 'article';
+}
+
+/**
  * Page Découvrir - Liens partenaires
  */
 export interface PartnerLink {

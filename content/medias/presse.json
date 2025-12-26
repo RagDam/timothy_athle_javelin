@@ -1,0 +1,69 @@
+{
+  "articles": [
+    {
+      "id": "ouest-france-2025-12-09",
+      "title": "Le licencié de l'US Arnage/ESA Timothy Montavon réalise la meilleure performance française de l'année",
+      "source": "Ouest-France",
+      "date": "2025-12-09",
+      "url": "https://www.ouest-france.fr/sport/athletisme/athletisme-le-licencie-de-lus-arnage-esa-timothy-montavon-realise-la-meilleure-performance-francaise-de-lannee-d9ee6308-d527-11f0-a7e2-d7ba2afec4fd",
+      "excerpt": "50m70 au javelot au championnat départemental de lancers longs à Coulaines.",
+      "tag": "Championnats Départementaux Lancers"
+    },
+    {
+      "id": "maville-lemans-2025-06-15",
+      "title": "Timothy Montavon à nouveau champion de France",
+      "source": "Le Mans Maville",
+      "date": "2025-06-15",
+      "url": "https://lemans.maville.com/actu/actudet_-arnage.-timothy-montavon-a-nouveau-champion-de-france-_14-6868158_actu.Htm",
+      "excerpt": "L'athlète arnageois confirme son titre de champion de France.",
+      "tag": "Championnats de France UGSEL"
+    },
+    {
+      "id": "ouest-france-2025-05-31",
+      "title": "Timothy Montavon de l'US Arnage champion régional",
+      "source": "Ouest-France",
+      "date": "2025-05-31",
+      "url": "https://www.ouest-france.fr/pays-de-la-loire/arnage-72230/timothy-montavon-de-lus-arnage-champion-regional-1d620c2b-f621-4e2c-94dc-462e030e1b8e",
+      "excerpt": "Champion régional d'épreuves combinées.",
+      "tag": "Championnats Régionaux Épreuves Combinées"
+    },
+    {
+      "id": "maville-lemans-2025-06-09",
+      "title": "Coline Bereau et Timothy Montavon à l'honneur lors des championnats départementaux",
+      "source": "Le Mans Maville",
+      "date": "2025-06-09",
+      "url": "https://lemans.maville.com/sport/detail_-athletisme.-coline-bereau-et-timothy-montavon-a-l-honneur-lors-des-championnats-departementaux-_loc-6844445_actu.Htm",
+      "excerpt": "Champion régional d'épreuves combinées aux championnats départementaux.",
+      "tag": "Championnats Départementaux"
+    },
+    {
+      "id": "ouest-france-2025-02-10",
+      "title": "Athlétisme. Pennetier, Kamdem et Montavon titrés",
+      "source": "Ouest-France",
+      "date": "2025-02-10",
+      "url": "https://www.ouest-france.fr/sport/athletisme/athletisme-pennetier-kamdem-et-montavon-titres-067164e6-e7d2-11ef-a721-b0bb668bdebd",
+      "excerpt": "Titre interrégional aux Pré-France de lancers longs à Saint-Nazaire.",
+      "tag": "Pré-France Lancers"
+    },
+    {
+      "id": "alexposure-2025-03-18",
+      "title": "Match Interligues U16 – 2025 : une compétition par équipes sous le signe de l'émulation",
+      "source": "Alexposure",
+      "date": "2025-03-18",
+      "url": "https://alexposure.fr/2025/03/18/match-interligues-u16-2025-une-competition-par-equipes-sous-le-signe-de-lemulation/",
+      "excerpt": "Compétition par équipes U16.",
+      "tag": "Match Interligues U16"
+    }
+  ],
+  "interviews": [
+    {
+      "id": "francebleu-maine-2025-12-15",
+      "title": "Timothy Montavon, 15 ans - Lanceur de javelot au Pôle Espoir de Poitiers",
+      "media": "France Bleu Maine",
+      "date": "2025-12-15",
+      "url": "https://media.radiofrance-podcast.net/podcast09/23431-15.12.2025-ITEMA_24342906-2025B48980S0349-NET_72A_00AEF858-6C77-4D14-85AD-EC693F36342D-21-4668adc39f505ee1430d419ac2cd2591.mp3",
+      "sourceUrl": "https://www.francebleu.fr/emissions/fb-maine-2-minutes-chrono/maine",
+      "type": "audio"
+    }
+  ]
+}

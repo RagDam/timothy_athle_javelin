@@ -82,3 +82,35 @@ Fichier : `content/palmares/resultats.json`
 
 - Surlignage jaune = 1ère place uniquement (pas les records)
 - Anti-doublon : vérifier date + lieu + perf avant ajout
+
+## Articles de Presse & Interviews
+
+Fichier : `content/medias/presse.json`
+
+```json
+{
+  "articles": [{
+    "id": "source-YYYY-MM-DD",
+    "title": "Titre de l'article",
+    "source": "Nom du média",
+    "date": "YYYY-MM-DD",
+    "url": "https://...",
+    "excerpt": "Court résumé (optionnel)",
+    "tag": "Nom de la compétition (optionnel)"
+  }],
+  "interviews": [{
+    "id": "media-YYYY-MM-DD",
+    "title": "Titre de l'interview",
+    "media": "Nom du média",
+    "date": "YYYY-MM-DD",
+    "url": "https://... (MP3/vidéo directe)",
+    "sourceUrl": "https://... (page source, optionnel)",
+    "type": "video|audio|article"
+  }]
+}
+```
+
+**Règles** :
+- Anti-doublon : vérifier URL avant ajout
+- Tri automatique par date (plus récent en premier) dans le code
+- ID format : `source-YYYY-MM-DD` (ex: `ouest-france-2025-06-17`)
