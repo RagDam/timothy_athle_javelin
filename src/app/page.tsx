@@ -111,11 +111,11 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Envie de collaborer ?
+              On reste en contact ?
             </h2>
             <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
-              Sponsors, médias, organisateurs d&apos;événements...
-              N&apos;hésitez pas à me contacter pour toute opportunité de collaboration.
+              Une question, une idée ou juste envie de discuter ?
+              N&apos;hésite pas à m&apos;écrire !
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button href="/contact" variant="accent" size="lg">

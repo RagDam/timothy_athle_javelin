@@ -89,10 +89,11 @@ export const ContactForm: FC = () => {
           required
           className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
         >
-          <option value="">Sélectionnez un sujet</option>
-          <option value="sponsoring">Sponsoring / Partenariat</option>
-          <option value="media">Demande média / Interview</option>
-          <option value="event">Événement / Compétition</option>
+          <option value="">Choisis un sujet</option>
+          <option value="soutien">Me soutenir</option>
+          <option value="media">Interview / Média</option>
+          <option value="event">Compétition / Événement</option>
+          <option value="question">Question / Conseil</option>
           <option value="other">Autre</option>
         </select>
       </div>

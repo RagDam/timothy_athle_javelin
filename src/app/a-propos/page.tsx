@@ -288,7 +288,7 @@ export default function AboutPage() {
               <ValueCard
                 icon={<Target className="text-blue-500" size={32} />}
                 title="Persévérance"
-                description="Chaque entraînement est une opportunité de progresser. Je ne lâche jamais."
+                description="Chaque entraînement compte. Je donne tout pour progresser, je ne lâche jamais."
               />
             </AnimatedSection>
             <AnimatedSection animation="fadeUp" delay={0.2}>
@@ -317,7 +317,7 @@ export default function AboutPage() {
               Envie d&apos;en savoir plus ?
             </h2>
             <p className="text-slate-400 mb-8">
-              Découvrez mon palmarès ou contactez-moi pour toute opportunité
+              Découvre mon palmarès ou écris-moi si tu veux échanger !
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button href="/palmares" variant="accent" size="lg">

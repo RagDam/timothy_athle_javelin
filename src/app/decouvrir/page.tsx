@@ -78,11 +78,11 @@ export default function DecouvrirPage() {
             <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-8 text-center">
               <Building2 className="mx-auto text-purple-500 mb-4" size={48} />
               <h2 className="text-2xl font-bold text-white mb-4">
-                Devenir partenaire
+                Envie de me soutenir ?
               </h2>
               <p className="text-slate-300 mb-6 max-w-xl mx-auto">
-                Vous souhaitez soutenir mon parcours vers le haut niveau ?
-                N&apos;hésitez pas à me contacter pour discuter d&apos;un éventuel partenariat.
+                Tu veux m&apos;encourager ou m&apos;aider dans mon parcours ?
+                N&apos;hésite pas à me contacter, ça me ferait super plaisir !
               </p>
               <Button href="/contact" variant="accent" size="lg">
                 Me contacter

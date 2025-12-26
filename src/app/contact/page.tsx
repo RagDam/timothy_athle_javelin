@@ -7,7 +7,7 @@ import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
   title: 'Contact - Timothy Montavon',
-  description: 'Contactez Timothy Montavon pour toute demande de collaboration, sponsoring ou opportunité.',
+  description: 'Contactez Timothy Montavon pour échanger, poser une question ou simplement discuter.',
 };
 
 export default function ContactPage() {
@@ -32,9 +32,9 @@ export default function ContactPage() {
               Contact
             </h1>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              Une question, une proposition de collaboration ?
+              Une question ou envie de discuter ?
               <br />
-              N&apos;hésitez pas à me contacter.
+              N&apos;hésite pas à m&apos;écrire !
             </p>
           </AnimatedSection>
         </div>
@@ -50,8 +50,8 @@ export default function ContactPage() {
                 Restons en contact
               </h2>
               <p className="text-slate-300 mb-8">
-                Sponsors, médias, organisateurs d&apos;événements, clubs...
-                Je suis ouvert à toute opportunité de collaboration.
+                Que ce soit pour me poser une question, me proposer quelque chose
+                ou simplement échanger, je te réponds avec plaisir !
               </p>
 
               <div className="space-y-6">

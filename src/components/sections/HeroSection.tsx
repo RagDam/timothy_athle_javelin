@@ -78,7 +78,7 @@ export const HeroSection: FC<HeroSectionProps> = ({
         >
           {subtitle}
           <br className="hidden sm:block" />
-          Repousser les limites, viser l&apos;excellence.
+          Toujours aller plus loin.
         </motion.p>
 
         {/* Boutons CTA */}
