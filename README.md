@@ -19,9 +19,10 @@ Site web personnel de Timothy Montavon, jeune athlète français spécialisé da
 
 ## Stack technique
 
-- **Framework** : Next.js 15 (App Router)
+- **Framework** : Next.js 16 (App Router)
 - **Langage** : TypeScript
 - **Styling** : Tailwind CSS v4
+- **Police** : Satoshi (Fontshare)
 - **Animations** : Framer Motion
 - **Graphiques** : Recharts
 

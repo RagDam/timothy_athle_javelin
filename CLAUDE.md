@@ -54,16 +54,17 @@ async function convertHeicToJpg(inputPath, outputPath) {
 src/
 ├── app/                    # Pages Next.js (App Router)
 │   ├── api/               # API Routes
+│   ├── globals.css        # UNIQUE fichier CSS (design tokens)
 │   └── (pages)/           # Pages du site
 ├── components/
 │   ├── ui/                # Composants génériques (Button, Card...)
 │   ├── layout/            # Header, Footer, Navigation
 │   ├── sections/          # Sections de pages (Hero, Stats...)
 │   └── features/          # Composants métier par domaine
+├── fonts/                 # Polices locales (Satoshi)
 ├── lib/                   # Utilitaires et helpers
 ├── hooks/                 # Custom hooks React
 ├── types/                 # Types TypeScript globaux
-├── styles/                # CSS global et animations
 └── config/                # Configuration centralisée
 
 content/                   # Contenu Markdown et JSON
@@ -102,6 +103,83 @@ public/images/             # Images du site
 | `content/agenda/events.json` | Événements à venir |
 | `content/medias/gallery.json` | Photos et vidéos |
 | `content/decouvrir/partners.json` | Liens partenaires |
+
+---
+
+## Règles CSS & Styles (OBLIGATOIRE)
+
+### Police
+
+**Police officielle** : **Satoshi** (Fontshare)
+- Fichiers dans `src/fonts/`
+- Variable CSS : `--font-satoshi`
+- NE JAMAIS utiliser une autre police sans autorisation
+
+### Architecture CSS centralisée
+
+**OBLIGATOIRE** : Toutes les valeurs de design sont dans `src/app/globals.css`.
+
+```
+src/app/globals.css     # UNIQUE fichier CSS - Design tokens + utilities
+src/fonts/              # Polices locales (Satoshi)
+```
+
+### Variables CSS (Design Tokens)
+
+**INTERDIT** : Utiliser des couleurs hex directement dans les composants.
+**OBLIGATOIRE** : Utiliser les variables CSS définies dans `globals.css`.
+
+| Variable | Usage |
+|----------|-------|
+| `--color-bg-primary` | Fond principal (#0F172A) |
+| `--color-bg-secondary` | Fond secondaire (#1E293B) |
+| `--color-text-primary` | Texte principal (#F8FAFC) |
+| `--color-text-muted` | Texte atténué (#94A3B8) |
+| `--color-primary` | Bleu principal (#3B82F6) |
+| `--color-primary-light` | Bleu clair (#60A5FA) |
+| `--color-accent` | Amber accent (#F59E0B) |
+| `--color-accent-light` | Amber clair (#FBBF24) |
+| `--color-success` | Vert succès (#22C55E) |
+| `--color-danger` | Rouge erreur (#EF4444) |
+
+### Règles de style
+
+**DO (À faire)** :
+- Utiliser Tailwind CSS pour tous les styles
+- Utiliser la fonction `cn()` pour composer les classes
+- Utiliser les classes utilitaires de `globals.css` : `.text-gradient`, `.icon-box`, `.focus-ring`
+- Toujours utiliser les variables CSS pour les couleurs dans le CSS custom
+
+**DON'T (À éviter)** :
+- Couleurs hex hardcodées (`#3B82F6`) → Utiliser `var(--color-primary)`
+- CSS inline sauf cas dynamiques (Recharts)
+- Créer de nouveaux fichiers CSS
+- Modifier les couleurs sans mettre à jour les variables
+
+### Classes utilitaires disponibles
+
+| Classe | Usage |
+|--------|-------|
+| `.text-gradient` | Dégradé bleu sur texte |
+| `.text-gradient-accent` | Dégradé amber sur texte |
+| `.icon-box` | Container 48x48 pour icônes |
+| `.focus-ring` | Focus ring standardisé |
+| `.gradient-overlay` | Overlay sombre sur images |
+| `.card-interactive` | Card avec hover effect |
+| `.animate-fade-up` | Animation fade + slide up |
+| `.animate-fade-in` | Animation fade simple |
+
+### Couleurs par catégorie
+
+| Catégorie | Couleur | Variable |
+|-----------|---------|----------|
+| Primary (actions) | Bleu | `--color-primary` |
+| Accent (highlights) | Amber | `--color-accent` |
+| Success | Vert | `--color-success` |
+| Danger | Rouge | `--color-danger` |
+| Info (events) | Cyan | `--color-info` |
+| Purple (passions) | Violet | `--color-category-purple` |
+| Pink (Instagram) | Rose | `--color-category-pink` |
 
 ---
 
