@@ -1,7 +1,7 @@
 import { type Metadata } from 'next';
 import Image from 'next/image';
 import { AnimatedSection } from '@/components/ui';
-import { Trophy, TrendingUp, Calendar, Medal, MapPin, Award, BarChart3 } from 'lucide-react';
+import { Trophy, TrendingUp, Calendar, Medal, MapPin, Award, BarChart3, ExternalLink } from 'lucide-react';
 import { getResultats, getProgressionData, getResultatsByYear } from '@/lib/content';
 import { ProgressionChart } from '@/components/features/palmares';
 
@@ -40,9 +40,18 @@ export default function PalmaresPage() {
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
                 Palmarès
               </h1>
-              <p className="text-xl text-slate-300">
+              <p className="text-xl text-slate-300 mb-6">
                 Mes records personnels et résultats en compétition
               </p>
+              <a
+                href="https://www.athle.fr/athletes/2035277/resultats"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium"
+              >
+                <span>Voir ma fiche officielle FFA</span>
+                <ExternalLink size={14} />
+              </a>
             </AnimatedSection>
             <AnimatedSection animation="fadeUp" delay={0.2}>
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl shadow-amber-500/20">
