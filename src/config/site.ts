@@ -21,6 +21,7 @@ export const siteConfig = {
     { label: 'À propos', href: '/a-propos' },
     { label: 'Palmarès', href: '/palmares' },
     { label: 'Médias', href: '/medias' },
+    { label: 'Presse', href: '/presse' },
     { label: 'Agenda', href: '/agenda' },
     { label: 'Découvrir', href: '/decouvrir' },
     { label: 'Contact', href: '/contact' },
@@ -31,11 +32,6 @@ export const siteConfig = {
     instagram: 'timothy_athletisme',
     twitter: '',
     youtube: '',
-  },
-
-  // Widgets externes
-  widgets: {
-    instagramFeed: '//lightwidget.com/widgets/ccefe098e3b45638909a152173a147c4.html',
   },
 
   // Couleurs du thème
