@@ -8,6 +8,13 @@
       "color": "amber"
     },
     {
+      "id": "sprint",
+      "name": "Sprint",
+      "icon": "timer",
+      "isPrimary": false,
+      "color": "blue"
+    },
+    {
       "id": "haies",
       "name": "Haies",
       "icon": "timer",
@@ -58,6 +65,15 @@
     }
   ],
   "records": {
+    "sprint": {
+      "60m-salle": {
+        "name": "60m Salle",
+        "type": "time",
+        "records": {
+          "2025": { "perf": "7.72", "date": "2025-12-03", "lieu": "Vouneuil Sous Biard" }
+        }
+      }
+    },
     "haies": {
       "100m-haies-84": {
         "name": "100m Haies (84cm)",
@@ -199,6 +215,9 @@
     }
   },
   "resultats": {
+    "sprint": [
+      { "id": "2025-12-03-vouneuil-60m", "date": "2025-12-03", "epreuve": "60m Salle", "perf": "7.72", "lieu": "Vouneuil Sous Biard", "classement": 1, "niveau": "R2", "isRecord": true }
+    ],
     "haies": [
       { "id": "2025-11-16-nantes-60mh", "date": "2025-11-16", "epreuve": "60m Haies (91) Salle", "perf": "9.12", "lieu": "Nantes", "classement": 1, "niveau": "R1", "isRecord": true },
       { "id": "2025-07-14-lens-100mh", "date": "2025-07-14", "epreuve": "100m Haies (84)", "perf": "14.63", "lieu": "Lens", "classement": 2 },
