@@ -46,7 +46,7 @@ export const Header: FC = () => {
             className="flex items-center gap-2 text-lg md:text-xl font-bold text-white hover:text-blue-400 transition-colors"
           >
             <Image
-              src="/images/logo/logo.png"
+              src="/images/logo/logoTMAthle.png"
               alt="TM Logo"
               width={40}
               height={40}
