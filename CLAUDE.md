@@ -23,6 +23,27 @@ L'utilisateur dispose d'un fichier `start-dev.bat` qu'il lance lui-même.
 - Ne jamais regrouper plusieurs fonctionnalités dans un même commit
 - Granularité fine pour un historique clair et des reverts faciles
 
+### Conversion d'images Apple (HEIC)
+
+**OBLIGATOIRE** : Convertir automatiquement les fichiers HEIC en JPEG sans demander à l'utilisateur.
+
+Utiliser le package `heic-convert` (déjà installé) :
+
+```javascript
+const convert = require('heic-convert');
+const fs = require('fs');
+
+async function convertHeicToJpg(inputPath, outputPath) {
+  const inputBuffer = fs.readFileSync(inputPath);
+  const outputBuffer = await convert({
+    buffer: inputBuffer,
+    format: 'JPEG',
+    quality: 0.9
+  });
+  fs.writeFileSync(outputPath, outputBuffer);
+}
+```
+
 ---
 
 ## Architecture
