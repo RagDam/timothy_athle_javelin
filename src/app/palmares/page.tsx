@@ -43,15 +43,26 @@ export default function PalmaresPage() {
               <p className="text-xl text-slate-300 mb-6">
                 Mes records personnels et résultats en compétition
               </p>
-              <a
-                href="https://www.athle.fr/athletes/2035277/resultats"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium"
-              >
-                <span>Voir ma fiche officielle FFA</span>
-                <ExternalLink size={14} />
-              </a>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://www.athle.fr/athletes/2035277/resultats"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium"
+                >
+                  <span>Voir ma fiche officielle FFA</span>
+                  <ExternalLink size={14} />
+                </a>
+                <a
+                  href="https://www.athle.fr/bases/liste.aspx?frmpostback=true&frmbase=bilans&frmmode=1&frmespace=0&frmannee=2026&frmepreuve=672&frmsexe=M&frmcategorie=CA&frmdepartement=&frmligue=&frmnationalite=&frmvent=VR&frmamaxi="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
+                >
+                  <span>Bilan Javelot U18 France 2025/26</span>
+                  <ExternalLink size={14} />
+                </a>
+              </div>
             </AnimatedSection>
             <AnimatedSection animation="fadeUp" delay={0.2}>
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl shadow-amber-500/20">
