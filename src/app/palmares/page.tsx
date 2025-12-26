@@ -41,7 +41,7 @@ export default function PalmaresPage() {
                 Palmarès
               </h1>
               <p className="text-xl text-slate-300 mb-6">
-                Mes records personnels et résultats en compétition
+                Mes records et résultats au lancer de javelot
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
