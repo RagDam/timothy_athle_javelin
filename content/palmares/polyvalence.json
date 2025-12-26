@@ -87,6 +87,13 @@
   ],
   "records": {
     "sprint": {
+      "50m": {
+        "name": "50m",
+        "type": "time",
+        "records": {
+          "2023": { "perf": "7.88", "date": "2023-04-01", "lieu": "Le Mans" }
+        }
+      },
       "50m-salle": {
         "name": "50m Salle",
         "type": "time",
@@ -307,7 +314,8 @@
       { "id": "2025-04-26-coulaines-120m", "date": "2025-04-26", "epreuve": "120m", "perf": "15.31", "lieu": "Coulaines", "classement": 1, "isRecord": true },
       { "id": "2025-04-20-ancenis-100m", "date": "2025-04-20", "epreuve": "100m", "perf": "12.98", "lieu": "Ancenis-Saint-Gereon", "classement": 2 },
       { "id": "2024-11-23-montfort-50m", "date": "2024-11-23", "epreuve": "50m Salle", "perf": "6.9", "lieu": "Montfort Le Gesnois", "classement": 1, "isRecord": true },
-      { "id": "2024-04-20-lemans-120m", "date": "2024-04-20", "epreuve": "120m", "perf": "15.7", "lieu": "Le Mans", "classement": 3, "isRecord": true }
+      { "id": "2024-04-20-lemans-120m", "date": "2024-04-20", "epreuve": "120m", "perf": "15.7", "lieu": "Le Mans", "classement": 3, "isRecord": true },
+      { "id": "2023-04-01-lemans-50m", "date": "2023-04-01", "epreuve": "50m", "perf": "7.88", "lieu": "Le Mans", "classement": 4, "isRecord": true }
     ],
     "demi-fond": [
       { "id": "2025-11-16-nantes-1000m", "date": "2025-11-16", "epreuve": "1000m Piste Courte", "perf": "3:16.83", "lieu": "Nantes", "classement": 8, "niveau": "D6" },
@@ -334,7 +342,12 @@
       { "id": "2024-02-04-pontchateau-cross", "date": "2024-02-04", "epreuve": "Cross U16 Minimes", "perf": "14:58", "lieu": "Pontchateau", "classement": 90 },
       { "id": "2024-01-19-lemans-ugsel", "date": "2024-01-19", "epreuve": "Cross UGSEL 4e-3e", "perf": "15:06", "lieu": "Le Mans", "classement": 7 },
       { "id": "2024-01-19-lemans-minimes", "date": "2024-01-19", "epreuve": "Cross Minimes", "perf": "15:10", "lieu": "Le Mans", "classement": 20 },
-      { "id": "2024-01-14-arnage-cross", "date": "2024-01-14", "epreuve": "Cross Minimes", "perf": "14:47", "lieu": "Arnage", "classement": 19 }
+      { "id": "2024-01-14-arnage-cross", "date": "2024-01-14", "epreuve": "Cross Minimes", "perf": "14:47", "lieu": "Arnage", "classement": 19 },
+      { "id": "2023-12-17-lemans-cross", "date": "2023-12-17", "epreuve": "Cross Minimes", "perf": "10:48", "lieu": "Le Mans", "classement": 8 },
+      { "id": "2023-12-03-montfort-cross", "date": "2023-12-03", "epreuve": "Cross Minimes", "perf": "15:39", "lieu": "Montfort Le Gesnois", "classement": 13 },
+      { "id": "2023-11-15-allonnes-cross", "date": "2023-11-15", "epreuve": "Cross Minimes & Cadettes", "perf": "11:48", "lieu": "Allonnes", "classement": 52 },
+      { "id": "2023-01-29-lion-cross", "date": "2023-01-29", "epreuve": "Cross Benjamins", "perf": "13:26", "lieu": "Le Lion D'Angers", "classement": 118 },
+      { "id": "2023-01-15-lemans-cross", "date": "2023-01-15", "epreuve": "Cross Benjamins", "perf": "13:08", "lieu": "Le Mans", "classement": 28 }
     ],
     "haies": [
       { "id": "2025-11-16-nantes-60mh", "date": "2025-11-16", "epreuve": "60m Haies (91) Salle", "perf": "9.12", "lieu": "Nantes", "classement": 1, "niveau": "R1", "isRecord": true },
@@ -361,7 +374,14 @@
       { "id": "2024-02-17-nantes-50mh", "date": "2024-02-17", "epreuve": "50m Haies (84) Salle", "perf": "8.33", "lieu": "Nantes", "classement": 5 },
       { "id": "2023-12-10-lafleche-50mh", "date": "2023-12-10", "epreuve": "50m Haies (84) Salle", "perf": "8.57", "lieu": "La Fleche", "classement": 2, "isRecord": true },
       { "id": "2023-11-25-montfort-50mh", "date": "2023-11-25", "epreuve": "50m Haies (84) Salle", "perf": "8.60", "lieu": "Montfort Le Gesnois", "classement": 1 },
-      { "id": "2023-10-15-coulaines-100mh", "date": "2023-10-15", "epreuve": "100m Haies (84)", "perf": "19.81", "lieu": "Coulaines", "classement": 3, "isRecord": true }
+      { "id": "2023-10-15-coulaines-100mh", "date": "2023-10-15", "epreuve": "100m Haies (84)", "perf": "19.81", "lieu": "Coulaines", "classement": 3, "isRecord": true },
+      { "id": "2023-06-24-montfort-50mh65", "date": "2023-06-24", "epreuve": "50m Haies (65)", "perf": "8.79", "lieu": "Montfort Le Gesnois", "classement": 2 },
+      { "id": "2023-06-18-coulaines-50mh65", "date": "2023-06-18", "epreuve": "50m Haies (65)", "perf": "8.72", "lieu": "Coulaines", "classement": 5 },
+      { "id": "2023-06-04-lafleche-50mh65", "date": "2023-06-04", "epreuve": "50m Haies (65)", "perf": "8.66", "lieu": "La Fleche", "classement": 1, "isRecord": true },
+      { "id": "2023-04-30-coulaines-50mh65", "date": "2023-04-30", "epreuve": "50m Haies (65)", "perf": "8.79", "lieu": "Coulaines", "classement": 1 },
+      { "id": "2023-04-08-arnage-50mh65", "date": "2023-04-08", "epreuve": "50m Haies (65)", "perf": "9.15", "lieu": "Arnage", "classement": 1 },
+      { "id": "2023-03-05-saumur-50mh65", "date": "2023-03-05", "epreuve": "50m Haies (65) Salle", "perf": "8.98", "lieu": "Saumur", "classement": 2 },
+      { "id": "2023-02-11-nantes-50mh65", "date": "2023-02-11", "epreuve": "50m Haies (65) Salle", "perf": "8.91", "lieu": "Nantes", "classement": 1 }
     ],
     "longueur": [
       { "id": "2025-11-15-nantes-lg", "date": "2025-11-15", "epreuve": "Longueur Salle", "perf": "5.58", "lieu": "Nantes", "classement": 5, "isRecord": true },
@@ -387,7 +407,14 @@
       { "id": "2024-02-17-nantes-lg", "date": "2024-02-17", "epreuve": "Longueur Salle", "perf": "4.61", "lieu": "Nantes", "classement": 17 },
       { "id": "2023-12-10-lafleche-lg", "date": "2023-12-10", "epreuve": "Longueur Salle", "perf": "4.54", "lieu": "La Fleche", "classement": 5, "isRecord": true },
       { "id": "2023-11-25-montfort-lg", "date": "2023-11-25", "epreuve": "Longueur Salle", "perf": "4.45", "lieu": "Montfort Le Gesnois", "classement": 4 },
-      { "id": "2023-10-15-coulaines-lg", "date": "2023-10-15", "epreuve": "Longueur", "perf": "4.29", "lieu": "Coulaines", "classement": 6 }
+      { "id": "2023-10-15-coulaines-lg", "date": "2023-10-15", "epreuve": "Longueur", "perf": "4.29", "lieu": "Coulaines", "classement": 6 },
+      { "id": "2023-06-24-montfort-lg", "date": "2023-06-24", "epreuve": "Longueur", "perf": "4.24", "lieu": "Montfort Le Gesnois", "classement": 4 },
+      { "id": "2023-06-18-coulaines-lg", "date": "2023-06-18", "epreuve": "Longueur", "perf": "3.65", "lieu": "Coulaines", "classement": 18 },
+      { "id": "2023-06-04-lafleche-lg", "date": "2023-06-04", "epreuve": "Longueur", "perf": "4.25", "lieu": "La Fleche", "classement": 4 },
+      { "id": "2023-04-30-coulaines-lg", "date": "2023-04-30", "epreuve": "Longueur", "perf": "3.93", "lieu": "Coulaines", "classement": 3 },
+      { "id": "2023-04-01-lemans-lg", "date": "2023-04-01", "epreuve": "Longueur", "perf": "3.73", "lieu": "Le Mans", "classement": 7 },
+      { "id": "2023-03-05-saumur-lg", "date": "2023-03-05", "epreuve": "Longueur Salle", "perf": "3.83", "lieu": "Saumur", "classement": 10 },
+      { "id": "2023-02-11-nantes-lg", "date": "2023-02-11", "epreuve": "Longueur Salle", "perf": "3.90", "lieu": "Nantes", "classement": 19 }
     ],
     "hauteur": [
       { "id": "2025-11-15-nantes-ht", "date": "2025-11-15", "epreuve": "Hauteur Salle", "perf": "1.65", "lieu": "Nantes", "classement": 1, "isRecord": true },
@@ -416,6 +443,9 @@
       { "id": "2024-02-17-nantes-pds", "date": "2024-02-17", "epreuve": "Poids (4kg) Salle", "perf": "7.30", "lieu": "Nantes", "classement": 15 },
       { "id": "2023-12-10-lafleche-pds", "date": "2023-12-10", "epreuve": "Poids (4kg) Salle", "perf": "7.49", "lieu": "La Fleche", "classement": 3, "isRecord": true },
       { "id": "2023-11-25-montfort-pds", "date": "2023-11-25", "epreuve": "Poids (4kg) Salle", "perf": "7.29", "lieu": "Montfort Le Gesnois", "classement": 4 },
+      { "id": "2023-04-08-arnage-pds3", "date": "2023-04-08", "epreuve": "Poids (3kg)", "perf": "6.68", "lieu": "Arnage", "classement": 1 },
+      { "id": "2023-04-01-lemans-pds3", "date": "2023-04-01", "epreuve": "Poids (3kg)", "perf": "6.82", "lieu": "Le Mans", "classement": 3 },
+      { "id": "2023-03-05-saumur-pds3", "date": "2023-03-05", "epreuve": "Poids (3kg) Salle", "perf": "7.11", "lieu": "Saumur", "classement": 4 },
       { "id": "2023-02-11-nantes-pds3", "date": "2023-02-11", "epreuve": "Poids (3kg) Salle", "perf": "7.47", "lieu": "Nantes", "classement": 5, "isRecord": true }
     ],
     "disque": [
@@ -458,7 +488,12 @@
       { "id": "2023-10-15-coulaines-tri", "date": "2023-10-15", "epreuve": "Triathlon U14-U16", "perf": "54", "lieu": "Coulaines", "classement": 19 },
       { "id": "2023-06-24-montfort-tri", "date": "2023-06-24", "epreuve": "Triathlon U14-U16", "perf": "91", "lieu": "Montfort Le Gesnois", "classement": 2 },
       { "id": "2023-06-18-coulaines-tri", "date": "2023-06-18", "epreuve": "Triathlon U14-U16", "perf": "88", "lieu": "Coulaines", "classement": 8 },
-      { "id": "2023-06-04-lafleche-tri", "date": "2023-06-04", "epreuve": "Triathlon U14-U16", "perf": "96", "lieu": "La Fleche", "classement": 2, "isRecord": true }
+      { "id": "2023-06-04-lafleche-tri", "date": "2023-06-04", "epreuve": "Triathlon U14-U16", "perf": "96", "lieu": "La Fleche", "classement": 2, "isRecord": true },
+      { "id": "2023-04-30-coulaines-tri", "date": "2023-04-30", "epreuve": "Triathlon U14-U16", "perf": "86", "lieu": "Coulaines", "classement": 2 },
+      { "id": "2023-04-08-arnage-tri", "date": "2023-04-08", "epreuve": "Triathlon U14-U16", "perf": "71", "lieu": "Arnage", "classement": 1 },
+      { "id": "2023-04-01-lemans-tri", "date": "2023-04-01", "epreuve": "Triathlon U14-U16", "perf": "66", "lieu": "Le Mans", "classement": 5 },
+      { "id": "2023-03-05-saumur-tri", "date": "2023-03-05", "epreuve": "Triathlon Salle U14-U16", "perf": "76", "lieu": "Saumur", "classement": 8 },
+      { "id": "2023-02-11-nantes-tri", "date": "2023-02-11", "epreuve": "Triathlon Salle U14-U16", "perf": "78", "lieu": "Nantes", "classement": 32 }
     ]
   }
 }
