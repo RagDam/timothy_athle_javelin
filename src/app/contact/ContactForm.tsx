@@ -22,6 +22,7 @@ export const ContactForm: FC = () => {
       email: formData.get('email') as string,
       subject: formData.get('subject') as string,
       message: formData.get('message') as string,
+      honeypot: formData.get('website') as string, // Champ anti-bot
     };
 
     try {
@@ -50,6 +51,18 @@ export const ContactForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Honeypot anti-bot - invisible pour les humains */}
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="website">Ne pas remplir</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">

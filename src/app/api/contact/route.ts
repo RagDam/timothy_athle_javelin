@@ -1,15 +1,63 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Rate limiting simple en mémoire (reset au redémarrage)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 heure
+const MAX_REQUESTS = 5; // Max 5 emails par heure par IP
 
 interface ContactFormData {
   name: string;
   email: string;
   subject: string;
   message: string;
+  honeypot?: string; // Champ invisible pour les bots
+}
+
+function getClientIP(request: Request): string {
+  const forwarded = request.headers.get('x-forwarded-for');
+  const realIP = request.headers.get('x-real-ip');
+  return forwarded?.split(',')[0]?.trim() || realIP || 'unknown';
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return false;
+  }
+
+  if (record.count >= MAX_REQUESTS) {
+    return true;
+  }
+
+  record.count++;
+  return false;
 }
 
 export async function POST(request: Request) {
   try {
+    const clientIP = getClientIP(request);
+
+    // Rate limiting
+    if (isRateLimited(clientIP)) {
+      return NextResponse.json(
+        { error: 'Trop de messages envoyés. Réessayez plus tard.' },
+        { status: 429 }
+      );
+    }
+
     const data: ContactFormData = await request.json();
+
+    // Protection honeypot - si rempli, c'est un bot
+    if (data.honeypot) {
+      // On retourne succès pour ne pas alerter le bot
+      return NextResponse.json({ success: true });
+    }
 
     // Validation
     if (!data.name || !data.email || !data.subject || !data.message) {
@@ -19,21 +67,57 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Pour le MVP, le message est juste validé
-    // Plus tard, on intégrera Resend pour envoyer les emails
+    // Validation email basique
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      return NextResponse.json(
+        { error: 'Email invalide' },
+        { status: 400 }
+      );
+    }
 
-    // TODO: Intégrer Resend pour envoyer les emails
-    // import { Resend } from 'resend';
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.emails.send({
-    //   from: 'contact@timothy-montavon.fr',
-    //   to: 'ton-email@gmail.com',
-    //   subject: `[Contact Site] ${data.subject} - ${data.name}`,
-    //   html: `<p><strong>De:</strong> ${data.name} (${data.email})</p>
-    //          <p><strong>Sujet:</strong> ${data.subject}</p>
-    //          <p><strong>Message:</strong></p>
-    //          <p>${data.message}</p>`,
-    // });
+    // Validation longueur pour éviter les abus
+    if (data.name.length > 100 || data.message.length > 5000) {
+      return NextResponse.json(
+        { error: 'Message trop long' },
+        { status: 400 }
+      );
+    }
+
+    // Support plusieurs destinataires séparés par des virgules
+    const contactEmails = (process.env.CONTACT_EMAIL || 'contact@timothy-montavon.fr')
+      .split(',')
+      .map((email) => email.trim())
+      .filter(Boolean);
+
+    // Envoi de l'email avec Resend
+    const { error } = await resend.emails.send({
+      from: 'Site Timothy <onboarding@resend.dev>',
+      to: contactEmails,
+      replyTo: data.email,
+      subject: `[Contact Site] ${data.subject} - ${data.name}`,
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #3b82f6;">Nouveau message de contact</h2>
+          <p><strong>De :</strong> ${data.name}</p>
+          <p><strong>Email :</strong> <a href="mailto:${data.email}">${data.email}</a></p>
+          <p><strong>Sujet :</strong> ${data.subject}</p>
+          <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
+          <p><strong>Message :</strong></p>
+          <p style="white-space: pre-wrap; background: #f8fafc; padding: 15px; border-radius: 8px;">${data.message}</p>
+          <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
+          <p style="color: #64748b; font-size: 12px;">IP: ${clientIP}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error('Erreur Resend:', error);
+      return NextResponse.json(
+        { error: 'Erreur lors de l\'envoi de l\'email' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
