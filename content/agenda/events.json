@@ -1,13 +1,13 @@
 {
   "events": [
     {
-      "id": "2025-12-27-colmar-stage-javelot-ffa",
-      "title": "Stage National Javelot FFA",
+      "id": "2025-12-27-colmar-lancers-large",
+      "title": "Lancers LARGE Noël 2025",
       "date": "2025-12-27",
       "endDate": "2025-12-30",
       "time": null,
       "location": {
-        "venue": null,
+        "venue": "Stade de l'Europe",
         "city": "Colmar",
         "country": "France"
       },
@@ -16,7 +16,7 @@
       "discipline": "Javelot",
       "importance": "national",
       "image": "/images/partners/logo-ligueGE.jpg",
-      "description": "Stage de lancer de javelot avec des coachs fédéraux FFA, dont Jacques Danail (entraîneur national javelot), et mon coach Luc Duquerroy. Une trentaine d'athlètes U18 et U23.",
+      "description": "Stage de lancer de javelot avec des coachs fédéraux FFA, dont Jacques Danail (entraîneur national javelot), et mon coach Luc Duquerroy. Une trentaine d'athlètes U18 et U23. Organisé par la Ligue LARGE, le CD68 Athlétisme et PCA (Pays Colmar Athlétisme).",
       "status": "upcoming",
       "links": {
         "event": null,
