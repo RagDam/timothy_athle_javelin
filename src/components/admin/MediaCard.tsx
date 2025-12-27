@@ -4,10 +4,12 @@ import { useState } from 'react';
 import Image from 'next/image';
 import {
   Trash2,
+  Pencil,
   Image as ImageIcon,
   Video,
   Calendar,
   Folder,
+  MapPin,
   Loader2,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -17,9 +19,10 @@ import type { UploadedMedia } from '@/types/admin';
 interface MediaCardProps {
   media: UploadedMedia;
   onDelete: (id: string) => void;
+  onEdit: (media: UploadedMedia) => void;
 }
 
-export function MediaCard({ media, onDelete }: MediaCardProps) {
+export function MediaCard({ media, onDelete, onEdit }: MediaCardProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -89,21 +92,35 @@ export function MediaCard({ media, onDelete }: MediaCardProps) {
           {isImage ? 'Photo' : 'Vidéo'}
         </div>
 
-        {/* Bouton supprimer */}
-        <button
-          type="button"
-          onClick={() => setShowConfirm(true)}
-          disabled={isDeleting}
-          className={cn(
-            'absolute top-2 right-2 p-2 rounded-lg',
-            'bg-slate-900/80 text-slate-400 hover:text-red-400 hover:bg-slate-900',
-            'opacity-0 group-hover:opacity-100',
-            'transition-all',
-            'disabled:opacity-50'
-          )}
-        >
-          <Trash2 size={16} />
-        </button>
+        {/* Boutons d'action */}
+        <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-all">
+          {/* Bouton éditer */}
+          <button
+            type="button"
+            onClick={() => onEdit(media)}
+            className={cn(
+              'p-2 rounded-lg',
+              'bg-slate-900/80 text-slate-400 hover:text-blue-400 hover:bg-slate-900',
+              'transition-colors'
+            )}
+          >
+            <Pencil size={16} />
+          </button>
+          {/* Bouton supprimer */}
+          <button
+            type="button"
+            onClick={() => setShowConfirm(true)}
+            disabled={isDeleting}
+            className={cn(
+              'p-2 rounded-lg',
+              'bg-slate-900/80 text-slate-400 hover:text-red-400 hover:bg-slate-900',
+              'transition-colors',
+              'disabled:opacity-50'
+            )}
+          >
+            <Trash2 size={16} />
+          </button>
+        </div>
       </div>
 
       {/* Infos */}
@@ -121,7 +138,7 @@ export function MediaCard({ media, onDelete }: MediaCardProps) {
           </p>
         )}
 
-        <div className="flex items-center gap-4 mt-3 text-xs text-slate-500">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs text-slate-500">
           <span className="flex items-center gap-1">
             <Calendar size={12} />
             {formattedDate}
@@ -130,6 +147,12 @@ export function MediaCard({ media, onDelete }: MediaCardProps) {
             <Folder size={12} />
             {categoryInfo?.name || media.category}
           </span>
+          {media.location && (
+            <span className="flex items-center gap-1">
+              <MapPin size={12} />
+              {media.location}
+            </span>
+          )}
         </div>
       </div>
 

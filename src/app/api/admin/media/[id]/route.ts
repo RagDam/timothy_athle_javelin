@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { deleteMedia, updateMedia } from '@/lib/media-storage';
+import { debugLog } from '@/lib/debug-logger';
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -10,14 +11,18 @@ interface RouteParams {
  * DELETE /api/admin/media/[id] - Supprime un média
  */
 export async function DELETE(request: Request, { params }: RouteParams) {
+  debugLog('DELETE', 'Starting delete request');
   try {
     // Vérifier l'authentification
     const session = await auth();
+    debugLog('DELETE', 'Auth check', { hasSession: !!session });
     if (!session?.user) {
+      debugLog('DELETE', 'Auth failed');
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
     }
 
     const { id } = await params;
+    debugLog('DELETE', 'Media ID', { id });
 
     if (!id) {
       return NextResponse.json(
@@ -26,7 +31,9 @@ export async function DELETE(request: Request, { params }: RouteParams) {
       );
     }
 
+    debugLog('DELETE', 'Calling deleteMedia...');
     const success = await deleteMedia(id);
+    debugLog('DELETE', 'deleteMedia result', { success });
 
     if (!success) {
       return NextResponse.json(
@@ -37,7 +44,8 @@ export async function DELETE(request: Request, { params }: RouteParams) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Erreur suppression média:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    debugLog('DELETE', 'ERROR', { message: errorMessage });
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
   }
 }
@@ -63,11 +71,12 @@ export async function PATCH(request: Request, { params }: RouteParams) {
     }
 
     const body = await request.json();
-    const { title, description, category, date } = body;
+    const { title, description, location, category, date } = body;
 
     const updatedMedia = await updateMedia(id, {
       ...(title && { title }),
       ...(description !== undefined && { description }),
+      ...(location !== undefined && { location }),
       ...(category && { category }),
       ...(date && { date }),
     });

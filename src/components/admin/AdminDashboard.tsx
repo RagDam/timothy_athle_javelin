@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { UploadModal } from './UploadModal';
+import { EditMediaModal } from './EditMediaModal';
 import { MediaGrid } from './MediaGrid';
 import type { UploadedMedia } from '@/types/admin';
 
@@ -26,6 +27,7 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
   const [medias, setMedias] = useState<UploadedMedia[]>([]);
   const [loading, setLoading] = useState(true);
   const [showUploadModal, setShowUploadModal] = useState(false);
+  const [editingMedia, setEditingMedia] = useState<UploadedMedia | null>(null);
 
   // Charger les médias
   async function loadMedias() {
@@ -56,6 +58,19 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
   // Callback après suppression
   function handleDelete(id: string) {
     setMedias((prev) => prev.filter((m) => m.id !== id));
+  }
+
+  // Callback pour ouvrir l'édition
+  function handleEdit(media: UploadedMedia) {
+    setEditingMedia(media);
+  }
+
+  // Callback après édition réussie
+  function handleEditSuccess(updatedMedia: UploadedMedia) {
+    setMedias((prev) =>
+      prev.map((m) => (m.id === updatedMedia.id ? updatedMedia : m))
+    );
+    setEditingMedia(null);
   }
 
   // Stats
@@ -169,7 +184,7 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
             </button>
           </div>
         ) : (
-          <MediaGrid medias={medias} onDelete={handleDelete} />
+          <MediaGrid medias={medias} onDelete={handleDelete} onEdit={handleEdit} />
         )}
       </main>
 
@@ -178,6 +193,15 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
         <UploadModal
           onClose={() => setShowUploadModal(false)}
           onSuccess={handleUploadSuccess}
+        />
+      )}
+
+      {/* Modal d'édition */}
+      {editingMedia && (
+        <EditMediaModal
+          media={editingMedia}
+          onClose={() => setEditingMedia(null)}
+          onSuccess={handleEditSuccess}
         />
       )}
     </div>

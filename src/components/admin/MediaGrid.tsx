@@ -10,12 +10,13 @@ import type { UploadedMedia, MediaCategory } from '@/types/admin';
 interface MediaGridProps {
   medias: UploadedMedia[];
   onDelete: (id: string) => void;
+  onEdit: (media: UploadedMedia) => void;
 }
 
 type FilterType = 'all' | 'image' | 'video';
 type FilterCategory = 'all' | MediaCategory;
 
-export function MediaGrid({ medias, onDelete }: MediaGridProps) {
+export function MediaGrid({ medias, onDelete, onEdit }: MediaGridProps) {
   const [typeFilter, setTypeFilter] = useState<FilterType>('all');
   const [categoryFilter, setCategoryFilter] = useState<FilterCategory>('all');
 
@@ -113,7 +114,7 @@ export function MediaGrid({ medias, onDelete }: MediaGridProps) {
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredMedias.map((media) => (
-            <MediaCard key={media.id} media={media} onDelete={onDelete} />
+            <MediaCard key={media.id} media={media} onDelete={onDelete} onEdit={onEdit} />
           ))}
         </div>
       )}
