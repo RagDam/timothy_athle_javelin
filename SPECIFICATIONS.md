@@ -132,8 +132,29 @@
 ### Décisions futures
 
 - [ ] Nom de domaine (suggestions: timothy-montavon.fr, timothymontavon.com)
-- [ ] Compte Resend pour les emails
-- [ ] Compte Vercel pour l'hébergement
+- [x] Compte Resend pour les emails ✅ Configuré
+- [x] Compte Vercel pour l'hébergement ✅ Configuré
+
+---
+
+## Idées & Fonctionnalités Futures
+
+### Newsletter / Notifications (En attente)
+**Date**: 2025-12-27
+**Statut**: En attente d'un domaine vérifié
+
+**Description**: Permettre aux supporters de s'inscrire pour recevoir des notifications sur les résultats et compétitions à venir.
+
+**Prérequis**:
+- [ ] Achat d'un domaine personnalisé (ex: timothy-montavon.fr)
+- [ ] Vérification du domaine sur Resend
+
+**Options envisagées**:
+1. Newsletter email via Resend (avec domaine vérifié)
+2. Intégration Mailchimp (gratuit jusqu'à 500 contacts)
+3. Buttondown (simple, gratuit jusqu'à 100 abonnés)
+
+**Décision**: Reporter jusqu'à l'achat d'un domaine pour pouvoir envoyer depuis une adresse professionnelle (ex: newsletter@timothy-montavon.fr)
 
 ---
 

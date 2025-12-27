@@ -30,6 +30,7 @@ Next.js 16 + TypeScript + Tailwind CSS + Framer Motion | Langue : Français
 - **HEIC → JPEG** : Convertir auto avec `heic-convert` (qualité 0.9)
 - **Résultats sportifs** : Vérifier doublons avant ajout (date + lieu + perf)
 - **Services externes** : Si ajout d'un nouveau service/API, mettre à jour la section "Services Externes" + `.env.example`
+- **Nouvelles idées/fonctionnalités** : Toujours documenter dans `SPECIFICATIONS.md` (section "Idées & Fonctionnalités Futures")
 - **OBLIGATOIRE avant /clean-commit** : Vérifier l'API FFA pour l'année en cours et afficher un rapport de vérification :
   1. Récupérer TOUS les résultats de l'année via `https://www.athle.fr/ajax/fiche-athlete-resultats.aspx?seq=2035277&annee=YYYY`
   2. Comparer avec les fichiers locaux (`resultats.json` + `polyvalence.json`)
