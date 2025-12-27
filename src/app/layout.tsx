@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { Header, Footer } from '@/components/layout';
+import { ConditionalLayout } from '@/components/layout';
 import { siteConfig } from '@/config/site';
 import './globals.css';
 
@@ -64,12 +64,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const adminSecret = process.env.ADMIN_URL_SECRET || 'admin';
+
   return (
     <html lang="fr" className="scroll-smooth">
       <body className={`${satoshi.variable} antialiased`}>
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <ConditionalLayout adminSecret={adminSecret}>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   );

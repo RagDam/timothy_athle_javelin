@@ -18,9 +18,5 @@ export default async function AdminLayout({
     notFound();
   }
 
-  return (
-    <div className="min-h-screen bg-slate-900">
-      {children}
-    </div>
-  );
+  return <>{children}</>;
 }
