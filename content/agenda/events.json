@@ -1,6 +1,29 @@
 {
   "events": [
     {
+      "id": "2025-12-27-colmar-stage-javelot-ffa",
+      "title": "Stage National Javelot FFA",
+      "date": "2025-12-27",
+      "endDate": "2025-12-30",
+      "time": null,
+      "location": {
+        "venue": null,
+        "city": "Colmar",
+        "country": "France"
+      },
+      "type": "stage",
+      "category": "U18-U23",
+      "discipline": "Javelot",
+      "importance": "national",
+      "image": "/images/partners/logo-ligueGE.jpg",
+      "description": "Stage de lancer de javelot avec des coachs fédéraux FFA, dont Jacques Danail (entraîneur national javelot). Une trentaine d'athlètes U18 et U23.",
+      "status": "upcoming",
+      "links": {
+        "event": null,
+        "results": null
+      }
+    },
+    {
       "id": "2026-01-25-challans-regionaux-lancers",
       "title": "Championnats Régionaux de Lancers Longs",
       "date": "2026-01-25",
