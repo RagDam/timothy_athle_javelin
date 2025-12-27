@@ -115,6 +115,22 @@ Remplacer `YYYY` par l'année souhaitée (2020-2025). Cette API retourne tous le
 - Surlignage jaune = 1ère place uniquement (pas les records)
 - Anti-doublon : vérifier date + lieu + perf avant ajout
 
+## Agenda & Événements
+
+Fichier : `content/agenda/events.json`
+
+**Niveaux d'importance** (COHÉRENCE OBLIGATOIRE entre EventCard, MiniCalendar et events.json) :
+| Valeur | Label | Exemples |
+|--------|-------|----------|
+| `local` | Départemental | Championnats départementaux |
+| `regional` | Régional | Championnats régionaux, interclubs |
+| `national` | National | Stages FFA, championnats nationaux qualificatifs |
+| `major` | Championnat de France | France UGSEL, Coupe de France des Ligues |
+
+**Règle** : Toute nouvelle valeur d'importance doit être ajoutée dans :
+1. `EventCard.tsx` → type `Event['importance']` + `importanceLabels`
+2. `MiniCalendar.tsx` → `IMPORTANCE_COLORS` + priorité + légende
+
 ## Pages du site
 
 | Route | Description |

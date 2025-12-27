@@ -27,7 +27,7 @@ export interface Event {
   type: string;
   category: string;
   discipline: string;
-  importance: 'regional' | 'national' | 'major';
+  importance: 'local' | 'regional' | 'national' | 'major';
   image: string;
   description: string;
   status: string;
@@ -35,6 +35,7 @@ export interface Event {
 }
 
 const importanceLabels: Record<string, { label: string; color: string }> = {
+  local: { label: 'Départemental', color: 'bg-slate-700 text-slate-300' },
   regional: { label: 'Régional', color: 'bg-slate-600 text-slate-200' },
   national: { label: 'National', color: 'bg-cyan-600 text-white' },
   major: { label: 'Championnat de France', color: 'bg-amber-500 text-black' },

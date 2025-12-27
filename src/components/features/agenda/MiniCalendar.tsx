@@ -71,6 +71,7 @@ const IMPORTANCE_COLORS: Record<Event['importance'], string> = {
   major: 'bg-amber-500',
   national: 'bg-cyan-500',
   regional: 'bg-slate-400',
+  local: 'bg-slate-500',
 };
 
 export function MiniCalendar({
@@ -156,7 +157,7 @@ export function MiniCalendar({
 
             const eventColor = hasEvents
               ? dayEvents.reduce((best, e) => {
-                  const priority = { major: 3, national: 2, regional: 1 };
+                  const priority: Record<Event['importance'], number> = { major: 4, national: 3, regional: 2, local: 1 };
                   return priority[e.importance] > priority[best.importance] ? e : best;
                 }, dayEvents[0]).importance
               : null;
@@ -193,7 +194,7 @@ export function MiniCalendar({
       </AnimatePresence>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-4 mt-3 pt-3 border-t border-slate-700/50">
+      <div className="flex items-center justify-center gap-3 mt-3 pt-3 border-t border-slate-700/50 flex-wrap">
         <div className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-amber-500" />
           <span className="text-xs text-slate-400">Champ.</span>
@@ -205,6 +206,10 @@ export function MiniCalendar({
         <div className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-slate-400" />
           <span className="text-xs text-slate-400">Régional</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-slate-500" />
+          <span className="text-xs text-slate-400">Départ.</span>
         </div>
       </div>
     </div>
