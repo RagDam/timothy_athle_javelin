@@ -82,11 +82,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Support plusieurs destinataires séparés par des virgules
-    const contactEmails = (process.env.CONTACT_EMAIL || 'contact@timothy-montavon.fr')
-      .split(',')
-      .map((email) => email.trim())
-      .filter(Boolean);
+    // Email destinataire (un seul avec onboarding@resend.dev)
+    const contactEmail = (process.env.CONTACT_EMAIL || 'contact@timothy-montavon.fr').split(',')[0].trim();
 
     // Initialiser Resend au runtime (pas au build)
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -94,7 +91,7 @@ export async function POST(request: Request) {
     // Envoi de l'email avec Resend
     const { error } = await resend.emails.send({
       from: 'Site Timothy <onboarding@resend.dev>',
-      to: contactEmails,
+      to: contactEmail,
       replyTo: data.email,
       subject: `[Contact Site] ${data.subject} - ${data.name}`,
       html: `
