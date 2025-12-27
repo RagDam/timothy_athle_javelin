@@ -66,7 +66,7 @@ export default function AboutPage() {
                 {/* Stats flottantes */}
                 <div className="absolute -bottom-6 -left-6 bg-slate-800 rounded-xl p-4 shadow-xl">
                   <div className="text-3xl font-bold text-amber-500">2</div>
-                  <div className="text-sm text-slate-400">Titres France</div>
+                  <div className="text-sm text-slate-400">Titres France U16</div>
                 </div>
                 <div className="absolute -top-6 -right-6 bg-slate-800 rounded-xl p-4 shadow-xl">
                   <div className="text-3xl font-bold text-blue-500">50.70m</div>
