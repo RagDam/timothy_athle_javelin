@@ -120,8 +120,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Erreur API contact:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
     return NextResponse.json(
-      { error: 'Erreur serveur' },
+      { error: `Erreur serveur: ${errorMessage}` },
       { status: 500 }
     );
   }
