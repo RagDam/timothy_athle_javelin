@@ -1,11 +1,15 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { upload } from '@vercel/blob/client';
 import { X, Loader2, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { FileDropzone } from './FileDropzone';
 import { MEDIA_CATEGORIES } from '@/types/admin';
 import type { UploadedMedia, MediaCategory } from '@/types/admin';
+
+// Seuil pour utiliser l'upload client-side (10MB)
+const CLIENT_UPLOAD_THRESHOLD = 10 * 1024 * 1024;
 
 interface UploadModalProps {
   onClose: () => void;
@@ -21,6 +25,7 @@ export function UploadModal({ onClose, onSuccess }: UploadModalProps) {
   // Métadonnées
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
   const [category, setCategory] = useState<MediaCategory>('competitions');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
@@ -29,7 +34,7 @@ export function UploadModal({ onClose, onSuccess }: UploadModalProps) {
   const [error, setError] = useState('');
   const [progress, setProgress] = useState(0);
 
-  const handleFileSelect = useCallback((f: File, type: 'image' | 'video') => {
+  const handleFileSelect = useCallback((f: File, type: 'image' | 'video', exifDate?: string | null, detectedLocation?: string | null) => {
     setFile(f);
     setFileType(type);
     // Pré-remplir le titre avec le nom du fichier (sans extension)
@@ -37,12 +42,134 @@ export function UploadModal({ onClose, onSuccess }: UploadModalProps) {
       const name = f.name.replace(/\.[^/.]+$/, '');
       setTitle(name);
     }
+    // Utiliser la date EXIF si disponible
+    if (exifDate) {
+      setDate(exifDate);
+    }
+    // Utiliser le lieu détecté si disponible
+    if (detectedLocation) {
+      setLocation(detectedLocation);
+    }
   }, [title]);
 
   const handleClearFile = useCallback(() => {
     setFile(null);
     setFileType(null);
   }, []);
+
+  // Sanitize filename pour éviter les problèmes
+  const sanitizeFilename = (filename: string): string => {
+    const ext = filename.split('.').pop() || '';
+    const name = filename.replace(/\.[^/.]+$/, '');
+    const safeName = name
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z0-9_-]/g, '_')
+      .toLowerCase()
+      .slice(0, 50);
+    const timestamp = Date.now();
+    return `${safeName}-${timestamp}.${ext}`;
+  };
+
+  // Upload serveur (petits fichiers < 10MB)
+  const uploadViaServer = async (file: File, metadata: Record<string, unknown>): Promise<{ success: boolean; media?: UploadedMedia; error?: string }> => {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+
+      xhr.upload.addEventListener('progress', (event) => {
+        if (event.lengthComputable) {
+          const percent = Math.round((event.loaded / event.total) * 100);
+          setProgress(percent);
+        }
+      });
+
+      xhr.addEventListener('load', () => {
+        try {
+          const response = JSON.parse(xhr.responseText);
+          resolve(response);
+        } catch {
+          reject(new Error('Erreur de parsing de la réponse'));
+        }
+      });
+
+      xhr.addEventListener('error', () => {
+        reject(new Error('Erreur réseau'));
+      });
+
+      xhr.addEventListener('abort', () => {
+        reject(new Error('Upload annulé'));
+      });
+
+      xhr.open('POST', '/api/admin/upload');
+      xhr.setRequestHeader('Content-Type', file.type);
+      xhr.setRequestHeader('x-metadata', JSON.stringify(metadata));
+      xhr.setRequestHeader('x-filename', file.name);
+      xhr.setRequestHeader('x-file-type', file.type);
+      xhr.setRequestHeader('x-file-size', file.size.toString());
+      xhr.send(file);
+    });
+  };
+
+  // Upload client-side pour gros fichiers (>= 10MB)
+  // Utilise @vercel/blob/client pour upload directement vers Vercel Blob
+  const uploadViaClient = async (
+    file: File,
+    metadata: { title: string; description?: string; location?: string; category: MediaCategory; date: string }
+  ): Promise<{ success: boolean; media?: UploadedMedia; error?: string }> => {
+    try {
+      // Générer le pathname
+      const safeFilename = sanitizeFilename(file.name);
+      const pathname = `medias/${metadata.category}/${safeFilename}`;
+
+      // Simuler la progression (Vercel Blob client ne supporte pas le progress natif)
+      let progressInterval: NodeJS.Timeout | null = null;
+      let simulatedProgress = 0;
+
+      progressInterval = setInterval(() => {
+        simulatedProgress = Math.min(simulatedProgress + 2, 95);
+        setProgress(simulatedProgress);
+      }, 200);
+
+      // Upload via Vercel Blob client
+      const blob = await upload(pathname, file, {
+        access: 'public',
+        handleUploadUrl: '/api/admin/upload/token',
+      });
+
+      // Arrêter la simulation de progression
+      if (progressInterval) {
+        clearInterval(progressInterval);
+      }
+      setProgress(98);
+
+      // Enregistrer les métadonnées via l'API register
+      const registerResponse = await fetch('/api/admin/upload/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          url: blob.url,
+          pathname: blob.pathname,
+          contentType: file.type,
+          size: file.size,
+          metadata,
+        }),
+      });
+
+      if (!registerResponse.ok) {
+        const errorData = await registerResponse.json();
+        throw new Error(errorData.error || 'Erreur lors de l\'enregistrement');
+      }
+
+      setProgress(100);
+      const result = await registerResponse.json();
+      return result;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Erreur inconnue';
+      return { success: false, error: errorMessage };
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,42 +189,32 @@ export function UploadModal({ onClose, onSuccess }: UploadModalProps) {
     setProgress(0);
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append(
-        'metadata',
-        JSON.stringify({
-          title: title.trim(),
-          description: description.trim() || undefined,
-          category,
-          date,
-        })
-      );
+      const metadata = {
+        title: title.trim(),
+        description: description.trim() || undefined,
+        location: location.trim() || undefined,
+        category,
+        date,
+      };
 
-      // Simuler la progression (pas de vrai suivi pour fetch)
-      const progressInterval = setInterval(() => {
-        setProgress((p) => Math.min(p + 10, 90));
-      }, 200);
+      // Choisir la méthode d'upload selon la taille du fichier
+      const useClientUpload = file.size >= CLIENT_UPLOAD_THRESHOLD;
 
-      const response = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData,
-      });
+      const result = useClientUpload
+        ? await uploadViaClient(file, metadata)
+        : await uploadViaServer(file, metadata);
 
-      clearInterval(progressInterval);
-      setProgress(100);
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || 'Erreur lors de l\'upload');
+      if (!result.success) {
+        throw new Error(result.error || 'Erreur lors de l\'upload');
       }
 
       setStatus('success');
 
       // Attendre un peu pour montrer le succès, puis fermer
       setTimeout(() => {
-        onSuccess(data.media);
+        if (result.media) {
+          onSuccess(result.media);
+        }
       }, 1000);
     } catch (err) {
       setStatus('error');
@@ -167,6 +284,32 @@ export function UploadModal({ onClose, onSuccess }: UploadModalProps) {
                 'disabled:opacity-50'
               )}
               placeholder="Titre du média"
+            />
+          </div>
+
+          {/* Lieu */}
+          <div>
+            <label
+              htmlFor="location"
+              className="block text-sm font-medium text-slate-300 mb-2"
+            >
+              Lieu{' '}
+              <span className="text-slate-500 font-normal">(optionnel, auto-détecté si GPS)</span>
+            </label>
+            <input
+              id="location"
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              disabled={status === 'uploading' || status === 'success'}
+              className={cn(
+                'w-full px-4 py-2.5 rounded-lg',
+                'bg-slate-700 border border-slate-600',
+                'text-white placeholder-slate-500',
+                'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
+                'disabled:opacity-50'
+              )}
+              placeholder="Ex: Poitiers, France"
             />
           </div>
 

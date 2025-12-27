@@ -25,7 +25,7 @@ export interface LoginAttempt {
 /**
  * Catégorie de média
  */
-export type MediaCategory = 'competitions' | 'training' | 'events';
+export type MediaCategory = 'competitions' | 'training' | 'events' | 'other';
 
 /**
  * Type de média
@@ -42,6 +42,7 @@ export interface UploadedMedia {
   pathname: string;
   title: string;
   description?: string;
+  location?: string; // Lieu de la compétition/événement
   category: MediaCategory;
   date: string;
   uploadedBy: string;
@@ -126,5 +127,10 @@ export const MEDIA_CATEGORIES: Array<{
     id: 'events',
     name: 'Événements',
     description: 'Remises de prix, meetings',
+  },
+  {
+    id: 'other',
+    name: 'Autre',
+    description: 'Autres médias',
   },
 ];
