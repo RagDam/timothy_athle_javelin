@@ -3,6 +3,7 @@ import { put } from '@vercel/blob';
 import { auth } from '@/lib/auth';
 import { addMedia } from '@/lib/media-storage';
 import { sanitizeFilename } from '@/lib/file-validation';
+import { debugLog } from '@/lib/debug-logger';
 import {
   ALLOWED_IMAGE_TYPES,
   ALLOWED_VIDEO_TYPES,
@@ -11,32 +12,35 @@ import {
 } from '@/types/admin';
 import type { UploadedMedia, MediaCategory } from '@/types/admin';
 
+// Note: Cette route est gardée pour la compatibilité mais l'upload client
+// via /api/admin/upload/token est préféré pour les gros fichiers
+
 export async function POST(request: Request) {
+  debugLog('UPLOAD', 'Starting upload request');
   try {
     // 1. Vérifier l'authentification
     const session = await auth();
+    debugLog('UPLOAD', 'Auth check', { hasSession: !!session, email: session?.user?.email });
     if (!session?.user?.email) {
+      debugLog('UPLOAD', 'Auth failed - no session');
       return NextResponse.json(
         { success: false, error: 'Non autorisé' },
         { status: 401 }
       );
     }
 
-    // 2. Parser le form data
-    const formData = await request.formData();
-    const file = formData.get('file') as File | null;
-    const metadataStr = formData.get('metadata') as string | null;
+    // 2. Récupérer les métadonnées depuis les headers (évite le parsing FormData)
+    const metadataStr = request.headers.get('x-metadata');
+    const filename = request.headers.get('x-filename') || 'file';
+    const fileType = request.headers.get('x-file-type') || 'application/octet-stream';
+    const fileSizeStr = request.headers.get('x-file-size') || '0';
+    const fileSize = parseInt(fileSizeStr, 10);
 
-    if (!file) {
-      return NextResponse.json(
-        { success: false, error: 'Aucun fichier fourni' },
-        { status: 400 }
-      );
-    }
+    debugLog('UPLOAD', 'Headers received', { metadataStr: !!metadataStr, filename, fileType, fileSize });
 
     if (!metadataStr) {
       return NextResponse.json(
-        { success: false, error: 'Métadonnées manquantes' },
+        { success: false, error: 'Métadonnées manquantes (header x-metadata)' },
         { status: 400 }
       );
     }
@@ -45,6 +49,7 @@ export async function POST(request: Request) {
     let metadata: {
       title: string;
       description?: string;
+      location?: string;
       category: MediaCategory;
       date: string;
     };
@@ -66,18 +71,14 @@ export async function POST(request: Request) {
     }
 
     // 4. Valider le type de fichier
-    const isImage = (ALLOWED_IMAGE_TYPES as readonly string[]).includes(
-      file.type
-    );
-    const isVideo = (ALLOWED_VIDEO_TYPES as readonly string[]).includes(
-      file.type
-    );
+    const isImage = (ALLOWED_IMAGE_TYPES as readonly string[]).includes(fileType);
+    const isVideo = (ALLOWED_VIDEO_TYPES as readonly string[]).includes(fileType);
 
     if (!isImage && !isVideo) {
       return NextResponse.json(
         {
           success: false,
-          error: `Type de fichier non supporté: ${file.type}`,
+          error: `Type de fichier non supporté: ${fileType}`,
         },
         { status: 400 }
       );
@@ -85,7 +86,7 @@ export async function POST(request: Request) {
 
     // 5. Valider la taille
     const maxSize = isImage ? MAX_IMAGE_SIZE : MAX_VIDEO_SIZE;
-    if (file.size > maxSize) {
+    if (fileSize > maxSize) {
       const maxSizeMB = maxSize / (1024 * 1024);
       return NextResponse.json(
         {
@@ -97,14 +98,27 @@ export async function POST(request: Request) {
     }
 
     // 6. Générer un nom de fichier sécurisé
-    const safeFilename = sanitizeFilename(file.name);
+    const safeFilename = sanitizeFilename(filename);
     const pathname = `medias/${metadata.category}/${safeFilename}`;
+    debugLog('UPLOAD', 'Preparing blob upload', { pathname, fileSize, fileType });
 
-    // 7. Upload vers Vercel Blob
-    const blob = await put(pathname, file, {
+    // 7. Upload vers Vercel Blob (lire le body complet d'abord)
+    debugLog('UPLOAD', 'Reading request body...');
+    const arrayBuffer = await request.arrayBuffer();
+    debugLog('UPLOAD', 'Body read complete', { actualSize: arrayBuffer.byteLength, expectedSize: fileSize });
+
+    if (arrayBuffer.byteLength !== fileSize) {
+      debugLog('UPLOAD', 'Size mismatch!', { actualSize: arrayBuffer.byteLength, expectedSize: fileSize });
+    }
+
+    debugLog('UPLOAD', 'Starting Vercel Blob upload...');
+    const blob = await put(pathname, arrayBuffer, {
       access: 'public',
       addRandomSuffix: false,
+      contentType: fileType,
     });
+
+    debugLog('UPLOAD', 'Blob upload success', { url: blob.url });
 
     // 8. Créer l'entrée média
     const mediaId = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
@@ -116,26 +130,30 @@ export async function POST(request: Request) {
       pathname: blob.pathname,
       title: metadata.title,
       description: metadata.description,
+      location: metadata.location,
       category: metadata.category,
       date: metadata.date,
       uploadedBy: session.user.email,
       uploadedAt: new Date().toISOString(),
-      size: file.size,
+      size: fileSize,
     };
 
     // 9. Sauvegarder les métadonnées
     await addMedia(newMedia);
+    debugLog('UPLOAD', 'Media saved successfully', { mediaId });
 
     return NextResponse.json({
       success: true,
       media: newMedia,
     });
   } catch (error) {
-    console.error('Erreur upload:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : '';
+    debugLog('UPLOAD', 'ERROR', { message: errorMessage, stack: errorStack });
     return NextResponse.json(
       {
         success: false,
-        error: 'Erreur lors de l\'upload',
+        error: `Erreur lors de l'upload: ${errorMessage}`,
       },
       { status: 500 }
     );
