@@ -6,12 +6,12 @@ Site web personnel de Timothy Montavon, jeune athlète français spécialisé da
 
 **Athlète** : Timothy Montavon (15 ans)
 **Discipline** : Lancer de javelot
-**Club** : ESA 72 / US Arnage
+**Club** : US Arnage + Pôle Espoir Poitiers
 
 ### Records personnels
 - 🥇 **50.70m** (javelot 700g) - Coulaines, Décembre 2025
-- 🥈 **50.16m** (javelot 600g) - Mayenne, Juin 2025
-- 🥉 **31.88m** (javelot 500g) - Arnage, Avril 2023
+- 🥈 **50.16m** (javelot 600g) - Lens, Juin 2025
+- 🥉 **31.88m** (javelot 500g) - Lens, Juin 2023
 
 ### Palmarès
 - Champion de France UGSEL 2025
