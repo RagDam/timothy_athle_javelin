@@ -30,6 +30,7 @@ Next.js 16 + TypeScript + Tailwind CSS + Framer Motion | Langue : Français
 - **HEIC → JPEG** : Convertir auto avec `heic-convert` (qualité 0.9)
 - **Résultats sportifs** : Vérifier doublons avant ajout (date + lieu + perf)
 - **Services externes** : Si ajout d'un nouveau service/API, mettre à jour la section "Services Externes" + `.env.example`
+- **OBLIGATOIRE avant /clean-commit** : Vérifier l'API FFA pour l'année en cours (remplacer YYYY par l'année actuelle dans l'URL de la section "API FFA") et synchroniser les nouveaux résultats
 
 ## Architecture
 
@@ -77,6 +78,7 @@ Types : `feat` | `fix` | `style` | `refactor` | `docs` | `chore`
 
 ## Résultats Sportifs
 
+### Javelot
 Fichier : `content/palmares/resultats.json`
 
 ```json
@@ -92,6 +94,17 @@ Fichier : `content/palmares/resultats.json`
 }
 ```
 
+### Polyvalence (autres disciplines)
+Fichier : `content/palmares/polyvalence.json`
+
+Disciplines : Sprint, Demi-fond, Relais, Cross, Haies, Longueur, Hauteur, Perche, Poids, Disque, Triathlon, Combinés
+
+### API FFA (source officielle)
+URL : `https://www.athle.fr/ajax/fiche-athlete-resultats.aspx?seq=2035277&annee=YYYY`
+
+Remplacer `YYYY` par l'année souhaitée (2020-2025). Cette API retourne tous les résultats officiels FFA de l'athlète.
+
+**Règles** :
 - Surlignage jaune = 1ère place uniquement (pas les records)
 - Anti-doublon : vérifier date + lieu + perf avant ajout
 

@@ -78,6 +78,13 @@
       "color": "blue"
     },
     {
+      "id": "triathlon",
+      "name": "Triathlon",
+      "icon": "layers",
+      "isPrimary": false,
+      "color": "purple"
+    },
+    {
       "id": "combines",
       "name": "Combinés",
       "icon": "layers",
@@ -207,7 +214,6 @@
         "name": "Longueur",
         "type": "distance",
         "records": {
-          "2021": { "perf": "1.13", "date": "2021-12-12", "lieu": "La Fleche" },
           "2022": { "perf": "4.16", "date": "2022-12-17", "lieu": "La Fleche" },
           "2023": { "perf": "4.54", "date": "2023-12-10", "lieu": "La Fleche" },
           "2024": { "perf": "5.29", "date": "2024-12-15", "lieu": "La Fleche" },
@@ -289,7 +295,7 @@
         }
       }
     },
-    "combines": {
+    "triathlon": {
       "triathlon": {
         "name": "Triathlon U14-U16",
         "type": "points",
@@ -301,7 +307,9 @@
           "2024": { "perf": "101", "date": "2024-12-15", "lieu": "La Fleche" },
           "2025": { "perf": "115", "date": "2025-06-29", "lieu": "Segre" }
         }
-      },
+      }
+    },
+    "combines": {
       "pentathlon-salle": {
         "name": "Pentathlon Salle",
         "type": "points",
@@ -516,22 +524,18 @@
       { "id": "2024-12-07-coulaines-dq", "date": "2024-12-07", "epreuve": "Disque (1.2kg)", "perf": "18.46", "lieu": "Coulaines", "classement": 4, "isRecord": true },
       { "id": "2022-10-15-coulaines-dq", "date": "2022-10-15", "epreuve": "Disque (1.0kg)", "perf": "14.85", "lieu": "Coulaines", "classement": 2, "isRecord": true }
     ],
-    "combines": [
-      { "id": "2025-11-16-nantes-hepta", "date": "2025-11-16", "epreuve": "Heptathlon Salle", "perf": "3540", "lieu": "Nantes", "classement": 8, "isRecord": true },
+    "triathlon": [
       { "id": "2025-06-29-segre-tri", "date": "2025-06-29", "epreuve": "Triathlon U14-U16", "perf": "115", "lieu": "Segre", "classement": 4, "isRecord": true },
       { "id": "2025-06-15-mayenne-tri", "date": "2025-06-15", "epreuve": "Triathlon U14-U16", "perf": "109", "lieu": "Mayenne", "classement": 10 },
       { "id": "2025-06-07-coulaines-tri", "date": "2025-06-07", "epreuve": "Triathlon U14-U16", "perf": "112", "lieu": "Coulaines", "classement": 1 },
-      { "id": "2025-05-25-nantes-octa", "date": "2025-05-25", "epreuve": "Octathlon", "perf": "3741", "lieu": "Nantes", "classement": 1, "isRecord": true, "notes": "Champion Régional" },
       { "id": "2025-05-24-nantes-tri", "date": "2025-05-24", "epreuve": "Triathlon U14-U16", "perf": "110", "lieu": "Nantes", "classement": 1 },
       { "id": "2025-05-17-coulaines-tri", "date": "2025-05-17", "epreuve": "Triathlon U14-U16", "perf": "108", "lieu": "Coulaines", "classement": 1 },
       { "id": "2025-05-11-mauges-tri", "date": "2025-05-11", "epreuve": "Triathlon U14-U16", "perf": "110", "lieu": "Mauges Sur Loire", "classement": 2 },
       { "id": "2025-04-26-coulaines-tri", "date": "2025-04-26", "epreuve": "Triathlon U14-U16", "perf": "99", "lieu": "Coulaines", "classement": 2 },
-      { "id": "2025-04-20-ancenis-octa", "date": "2025-04-20", "epreuve": "Octathlon", "perf": "3367", "lieu": "Ancenis-Saint-Gereon", "classement": 2 },
       { "id": "2025-04-19-ancenis-tri", "date": "2025-04-19", "epreuve": "Triathlon U14-U16", "perf": "101", "lieu": "Ancenis-Saint-Gereon", "classement": 1 },
       { "id": "2025-04-12-arnage-tri", "date": "2025-04-12", "epreuve": "Triathlon U14-U16", "perf": "92", "lieu": "Arnage", "classement": 1 },
       { "id": "2025-03-08-mouilleron-tri", "date": "2025-03-08", "epreuve": "Triathlon Salle U14-U16", "perf": "103", "lieu": "Mouilleron Le Captif", "classement": 7 },
       { "id": "2025-02-23-nantes-tri", "date": "2025-02-23", "epreuve": "Triathlon Salle U14-U16", "perf": "96", "lieu": "Nantes", "classement": 23 },
-      { "id": "2024-12-21-nantes-penta", "date": "2024-12-21", "epreuve": "Pentathlon Salle", "perf": "2426", "lieu": "Nantes", "classement": 3, "isRecord": true },
       { "id": "2024-12-15-lafleche-tri", "date": "2024-12-15", "epreuve": "Triathlon Salle U14-U16", "perf": "101", "lieu": "La Fleche", "classement": 2, "isRecord": true },
       { "id": "2024-11-23-montfort-tri", "date": "2024-11-23", "epreuve": "Triathlon Salle U14-U16", "perf": "88", "lieu": "Montfort Le Gesnois", "classement": 2 },
       { "id": "2024-10-13-coulaines-tri", "date": "2024-10-13", "epreuve": "Triathlon U14-U16", "perf": "93", "lieu": "Coulaines", "classement": 3 },
@@ -566,6 +570,12 @@
       { "id": "2021-12-12-lafleche-tri", "date": "2021-12-12", "epreuve": "Triathlon Salle U14-U16", "perf": "55", "lieu": "La Fleche", "classement": 10, "isRecord": true },
       { "id": "2021-11-27-montfort-tri", "date": "2021-11-27", "epreuve": "Triathlon Salle U14-U16", "perf": "54", "lieu": "Montfort Le Gesnois", "classement": 4 },
       { "id": "2020-02-01-champagne-tri", "date": "2020-02-01", "epreuve": "Triathlon Salle U14-U16", "perf": "11", "lieu": "Champagne", "classement": 6, "isRecord": true }
+    ],
+    "combines": [
+      { "id": "2025-11-16-nantes-hepta", "date": "2025-11-16", "epreuve": "Heptathlon Salle", "perf": "3540", "lieu": "Nantes", "classement": 8, "isRecord": true },
+      { "id": "2025-05-25-nantes-octa", "date": "2025-05-25", "epreuve": "Octathlon", "perf": "3741", "lieu": "Nantes", "classement": 1, "isRecord": true, "notes": "Champion Régional" },
+      { "id": "2025-04-20-ancenis-octa", "date": "2025-04-20", "epreuve": "Octathlon", "perf": "3367", "lieu": "Ancenis-Saint-Gereon", "classement": 2 },
+      { "id": "2024-12-21-nantes-penta", "date": "2024-12-21", "epreuve": "Pentathlon Salle", "perf": "2426", "lieu": "Nantes", "classement": 3, "isRecord": true }
     ]
   }
 }

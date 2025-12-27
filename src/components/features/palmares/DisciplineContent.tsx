@@ -40,6 +40,17 @@ interface DisciplineContentProps {
   resultats: Resultat[];
 }
 
+// Convertir un temps au format "M:SS.cc" ou "SS.cc" en secondes
+function parseTimeToSeconds(perf: string): number {
+  // Si contient ":", format M:SS.cc
+  if (perf.includes(':')) {
+    const [minutes, rest] = perf.split(':');
+    return parseFloat(minutes) * 60 + parseFloat(rest);
+  }
+  // Sinon, format SS.cc
+  return parseFloat(perf);
+}
+
 export function DisciplineContent({
   disciplineId,
   disciplineName,
@@ -47,6 +58,9 @@ export function DisciplineContent({
   records,
   resultats,
 }: DisciplineContentProps) {
+  // Déterminer si c'est une discipline de temps
+  const isTimeDiscipline = Object.values(records)[0]?.type === 'time';
+
   // Trouver le record actuel (meilleure perf)
   const getCurrentRecord = () => {
     const allRecords = Object.values(records);
@@ -96,11 +110,20 @@ export function DisciplineContent({
   const getProgressionData = () => {
     if (resultats.length === 0) return [];
 
+    // Filtrer les résultats pour le graphique
+    let filteredResultats = resultats;
+
+    // Pour les relais, exclure le 800-200-200-800 qui fausse l'échelle (temps > 5 min vs 30s)
+    if (disciplineId === 'relais') {
+      filteredResultats = resultats.filter((r) => !r.epreuve.includes('800m-200m'));
+    }
+
     // Utiliser toutes les compétitions, triées par date
-    return resultats
+    return filteredResultats
       .map((r) => ({
         date: r.date,
-        perf: parseFloat(r.perf),
+        perf: isTimeDiscipline ? parseTimeToSeconds(r.perf) : parseFloat(r.perf),
+        perfDisplay: r.perf, // Garder la valeur originale pour l'affichage
         epreuve: r.epreuve,
         lieu: r.lieu,
       }))
@@ -294,6 +317,7 @@ export function DisciplineContent({
                   data={progressionData}
                   objectif={null}
                   isTime={Object.values(records)[0]?.type === 'time'}
+                  isPoints={Object.values(records)[0]?.type === 'points'}
                 />
               </div>
             </AnimatedSection>

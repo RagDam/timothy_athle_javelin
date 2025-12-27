@@ -12,6 +12,26 @@ import {
   ComposedChart,
 } from 'recharts';
 
+// Convertir des secondes en format "M:SS" pour affichage sur l'axe Y
+function formatSecondsToTime(seconds: number): string {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  if (mins > 0) {
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+  return `${secs}''`;
+}
+
+// Convertir des secondes en format complet "M:SS.cc" pour tooltip
+function formatSecondsToFullTime(seconds: number): string {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  if (mins > 0) {
+    return `${mins}:${secs.toFixed(2).padStart(5, '0')}`;
+  }
+  return `${secs.toFixed(2)}''`;
+}
+
 interface ProgressionData {
   date: string;
   perf: number;
@@ -36,6 +56,7 @@ interface ProgressionChartProps {
   data: ProgressionData[] | SimpleProgressionData[] | MultiEpreuveData[];
   objectif?: number | null;
   isTime?: boolean;
+  isPoints?: boolean;
 }
 
 const enginColors: Record<string, string> = {
@@ -64,7 +85,7 @@ function isMultiEpreuveData(data: ProgressionData[] | SimpleProgressionData[] | 
   return data.length > 0 && 'epreuve' in data[0] && !('engin' in data[0]);
 }
 
-export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 60, isTime = false }) => {
+export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 60, isTime = false, isPoints = false }) => {
   // Détecter le mode
   const isSimple = isSimpleData(data);
   const isMultiEpreuve = isMultiEpreuveData(data);
@@ -74,16 +95,40 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
-  // Trouver min/max pour l'axe Y
+  // Trouver min/max pour l'axe Y avec marge adaptée
   const perfs = data.map((d) => d.perf);
-  const minPerf = isTime
-    ? Math.floor(Math.min(...perfs) - 1)
-    : Math.floor(Math.min(...perfs) / 5) * 5 - 5;
-  const maxPerf = isTime
-    ? Math.ceil(Math.max(...perfs) + 1)
-    : objectif
-      ? Math.max(Math.ceil(Math.max(...perfs) / 5) * 5, objectif + 5)
-      : Math.ceil(Math.max(...perfs) / 5) * 5 + 5;
+  const minPerfRaw = Math.min(...perfs);
+  const maxPerfRaw = Math.max(...perfs);
+  const range = maxPerfRaw - minPerfRaw;
+
+  let minPerf: number;
+  let maxPerf: number;
+
+  if (isTime) {
+    // Pour les temps (en secondes), marge de 5-10 secondes
+    const margin = Math.max(range * 0.1, 5);
+    minPerf = Math.floor((minPerfRaw - margin) / 10) * 10;
+    maxPerf = Math.ceil((maxPerfRaw + margin) / 10) * 10;
+  } else if (maxPerfRaw <= 3) {
+    // Pour très petites distances (hauteur ~1-2m), marge fine de 0.1m
+    const margin = Math.max(range * 0.1, 0.1);
+    minPerf = Math.floor((minPerfRaw - margin) * 10) / 10;
+    maxPerf = Math.ceil((maxPerfRaw + margin) * 10) / 10;
+    minPerf = Math.max(0, minPerf);
+  } else if (maxPerfRaw <= 10) {
+    // Pour petites distances (longueur 3-6m), marge de 0.25m arrondie à 0.5m
+    const margin = Math.max(range * 0.1, 0.25);
+    minPerf = Math.floor((minPerfRaw - margin) * 2) / 2;
+    maxPerf = Math.ceil((maxPerfRaw + margin) * 2) / 2;
+    minPerf = Math.max(0, minPerf);
+  } else {
+    // Pour les grandes distances (javelot, poids), arrondir aux 5m
+    const margin = Math.max(range * 0.1, 2);
+    minPerf = Math.floor((minPerfRaw - margin) / 5) * 5;
+    maxPerf = objectif
+      ? Math.max(Math.ceil((maxPerfRaw + margin) / 5) * 5, objectif + 5)
+      : Math.ceil((maxPerfRaw + margin) / 5) * 5;
+  }
 
   // Mode multi-épreuves (haies, poids, combinés, etc.)
   if (isMultiEpreuve) {
@@ -125,7 +170,17 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
     });
 
     const tickInterval = Math.max(1, Math.floor(chartData.length / 10));
-    const unit = isTime ? "''" : 'm';
+
+    // Fonction de formatage pour l'axe Y
+    const formatYAxis = (value: number) => {
+      if (isTime) {
+        return formatSecondsToTime(value);
+      }
+      if (isPoints) {
+        return `${value} pts`;
+      }
+      return `${value}m`;
+    };
 
     return (
       <div className="w-full">
@@ -170,13 +225,14 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
                 stroke="#94a3b8"
                 tick={{ fill: '#94a3b8', fontSize: 12 }}
                 tickLine={{ stroke: '#475569' }}
-                tickFormatter={(value) => `${value}${unit}`}
+                tickFormatter={formatYAxis}
               />
               <Tooltip
                 content={({ active, payload }) => {
                   if (!active || !payload || !payload.length) return null;
                   const d = payload[0].payload as MultiEpreuveData & { fullDate: string };
                   const color = epreuveColorMap[d.epreuve] || '#3b82f6';
+                  const displayPerf = isTime ? formatSecondsToFullTime(d.perf) : isPoints ? `${d.perf} pts` : `${d.perf}m`;
                   return (
                     <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-xl">
                       <div className="flex items-center gap-2 mb-1">
@@ -186,7 +242,7 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
                         />
                         <span className="text-slate-300 text-xs">{d.epreuve}</span>
                       </div>
-                      <p className="text-white font-bold text-lg">{d.perf}{unit}</p>
+                      <p className="text-white font-bold text-lg">{displayPerf}</p>
                       <p className="text-slate-400 text-sm">{d.fullDate}</p>
                       <p className="text-slate-500 text-xs">{d.lieu}</p>
                     </div>
@@ -228,7 +284,17 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
       perfSimple: item.perf,
     }));
 
-    const unit = isTime ? "''" : 'm';
+    // Fonction de formatage pour l'axe Y (mode simple)
+    const formatYAxisSimple = (value: number) => {
+      if (isTime) {
+        return formatSecondsToTime(value);
+      }
+      if (isPoints) {
+        return `${value} pts`;
+      }
+      return `${value}m`;
+    };
+
     return (
       <div className="w-full">
         <div className="h-[300px]">
@@ -249,15 +315,16 @@ export const ProgressionChart: FC<ProgressionChartProps> = ({ data, objectif = 6
                 stroke="#94a3b8"
                 tick={{ fill: '#94a3b8', fontSize: 12 }}
                 tickLine={{ stroke: '#475569' }}
-                tickFormatter={(value) => `${value}${unit}`}
+                tickFormatter={formatYAxisSimple}
               />
               <Tooltip
                 content={({ active, payload }) => {
                   if (!active || !payload || !payload.length) return null;
                   const d = payload[0].payload;
+                  const displayPerf = isTime ? formatSecondsToFullTime(d.perf) : isPoints ? `${d.perf} pts` : `${d.perf}m`;
                   return (
                     <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-xl">
-                      <p className="text-white font-bold text-lg">{d.perf}{unit}</p>
+                      <p className="text-white font-bold text-lg">{displayPerf}</p>
                       <p className="text-slate-400 text-sm">{d.fullDate}</p>
                     </div>
                   );
