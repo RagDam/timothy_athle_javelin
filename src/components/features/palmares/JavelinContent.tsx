@@ -96,9 +96,9 @@ export function JavelinContent({ data, progressionData }: JavelinContentProps) {
       </section>
 
       {/* Titres majeurs */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12">
+          <AnimatedSection className="mb-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center">
                 <Trophy className="text-amber-500" size={24} />
@@ -135,9 +135,9 @@ export function JavelinContent({ data, progressionData }: JavelinContentProps) {
       </section>
 
       {/* Records personnels */}
-      <section className="py-20 bg-slate-800/30">
+      <section className="py-12 bg-slate-800/30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12">
+          <AnimatedSection className="mb-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
                 <Medal className="text-blue-500" size={24} />
@@ -167,9 +167,9 @@ export function JavelinContent({ data, progressionData }: JavelinContentProps) {
       </section>
 
       {/* Graphique de progression */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12">
+          <AnimatedSection className="mb-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
                 <BarChart3 className="text-green-500" size={24} />
@@ -197,10 +197,10 @@ export function JavelinContent({ data, progressionData }: JavelinContentProps) {
         return (
           <section
             key={year}
-            className={`py-20 ${yearIndex % 2 === 0 ? 'bg-slate-800/30' : ''}`}
+            className={`py-12 ${yearIndex % 2 === 0 ? 'bg-slate-800/30' : ''}`}
           >
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-              <AnimatedSection className="mb-12">
+              <AnimatedSection className="mb-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div
                     className={`w-12 h-12 rounded-xl flex items-center justify-center ${

@@ -14,7 +14,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/hero/contact.jpg"
@@ -41,9 +41,9 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Infos de contact */}
             <AnimatedSection animation="fadeUp">
               <h2 className="text-2xl font-bold text-white mb-6">

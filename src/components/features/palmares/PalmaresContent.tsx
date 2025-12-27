@@ -76,10 +76,10 @@ export function PalmaresContent({
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-amber-600/20 to-slate-900" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <AnimatedSection>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-sm mb-6">
                 <Trophy size={16} />

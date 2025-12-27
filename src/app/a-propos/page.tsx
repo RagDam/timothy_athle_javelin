@@ -28,10 +28,10 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-600/20 to-slate-900" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             {/* Texte */}
             <AnimatedSection>
               <p className="text-blue-400 font-medium mb-4">À propos</p>
@@ -79,7 +79,7 @@ export default function AboutPage() {
       </section>
 
       {/* Section Présentation */}
-      <section className="py-20 bg-slate-800/30">
+      <section className="py-12 bg-slate-800/30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="flex items-center gap-3 mb-6">
@@ -105,9 +105,9 @@ export default function AboutPage() {
       </section>
 
       {/* Section Encadrement */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
+          <AnimatedSection className="text-center mb-8">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
                 <Users className="text-green-500" size={24} />
@@ -141,7 +141,7 @@ export default function AboutPage() {
       </section>
 
       {/* Section Javelot */}
-      <section className="py-20 bg-slate-800/30">
+      <section className="py-12 bg-slate-800/30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="flex items-center gap-3 mb-6">
@@ -186,9 +186,9 @@ export default function AboutPage() {
       </section>
 
       {/* Section Objectifs */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
+          <AnimatedSection className="text-center mb-8">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
                 <Target className="text-red-500" size={24} />
@@ -228,9 +228,9 @@ export default function AboutPage() {
       </section>
 
       {/* Section Au-delà du javelot */}
-      <section className="py-20 bg-slate-800/30">
+      <section className="py-12 bg-slate-800/30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12">
+          <AnimatedSection className="mb-8">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
                 <Heart className="text-purple-500" size={24} />
@@ -274,9 +274,9 @@ export default function AboutPage() {
       </section>
 
       {/* Section Valeurs */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
+          <AnimatedSection className="text-center mb-8">
             <h2 className="text-3xl font-bold text-white mb-4">Mes valeurs</h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
               Ce qui me guide au quotidien dans ma pratique sportive
@@ -310,13 +310,13 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-b from-slate-800/50 to-slate-900">
+      <section className="py-12 bg-gradient-to-b from-slate-800/50 to-slate-900">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <h2 className="text-3xl font-bold text-white mb-3">
               Envie d&apos;en savoir plus ?
             </h2>
-            <p className="text-slate-400 mb-8">
+            <p className="text-slate-400 mb-6">
               Découvre mon palmarès ou écris-moi si tu veux échanger !
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

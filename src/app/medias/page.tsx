@@ -15,10 +15,10 @@ export default function MediasPage() {
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-pink-600/20 via-purple-600/10 to-slate-900" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <AnimatedSection>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/20 border border-pink-500/30 text-pink-400 text-sm mb-6">
                 <Camera size={16} />
@@ -48,7 +48,7 @@ export default function MediasPage() {
       </section>
 
       {/* Section Photos & Vidéos */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-8">
             <h2 className="text-3xl font-bold text-white flex items-center gap-3">

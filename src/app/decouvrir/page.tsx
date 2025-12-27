@@ -34,7 +34,7 @@ export default function DecouvrirPage() {
   return (
     <main className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/hero/decouvrir.jpg"
@@ -72,7 +72,7 @@ export default function DecouvrirPage() {
       ))}
 
       {/* CTA Partenariat */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-8 text-center">
@@ -105,9 +105,9 @@ function SectionBlock({ section, isAlternate }: SectionBlockProps) {
   const colors = colorMap[section.iconColor];
 
   return (
-    <section className={`py-16 ${isAlternate ? 'bg-slate-800/30' : ''}`}>
+    <section className={`py-10 ${isAlternate ? 'bg-slate-800/30' : ''}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="mb-10">
+        <AnimatedSection className="mb-6">
           <div className="flex items-center gap-3 mb-2">
             <div className={`w-10 h-10 ${colors.bg} rounded-lg flex items-center justify-center`}>
               <IconComponent className={colors.text} size={20} />

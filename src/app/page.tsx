@@ -20,9 +20,9 @@ export default async function HomePage() {
       />
 
       {/* Section Présentation */}
-      <section className="py-24 bg-slate-800/50">
+      <section className="py-12 bg-slate-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-16">
+          <AnimatedSection className="text-center mb-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Bienvenue sur mon univers
             </h2>
@@ -107,13 +107,13 @@ export default async function HomePage() {
       </section>
 
       {/* Section CTA */}
-      <section className="py-24 bg-gradient-to-b from-slate-800/50 to-slate-900">
+      <section className="py-12 bg-gradient-to-b from-slate-800/50 to-slate-900">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
               On reste en contact ?
             </h2>
-            <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
+            <p className="text-slate-400 mb-6 max-w-2xl mx-auto">
               Une question, une idée ou juste envie de discuter ?
               N&apos;hésite pas à m&apos;écrire !
             </p>
